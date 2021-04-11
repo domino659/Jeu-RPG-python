@@ -1,3 +1,3 @@
 # Jeu-bagarre
 
-bagar
+**bagar**
