@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys 
 from settings import *
 from sprites import *
 from tilemap import *
@@ -20,41 +20,38 @@ class Game:
 
 
     def load_data(self):
-        ###################################################
-        # self.map = Map(CURRENT_MAP)
+        self.player_img = pygame.image.load(PLAYER_IMG)
+        self.pnj_img = pygame.image.load(PNJ_IMG)
+
         self.map = TiledMap(MAP)
         self.map_img = self.map.make_map()
-        self.map_rect = self.map_img.get_rect()
-        ###################################################
+        self.map_rect = self.map_img.get_rect()    
+    
+        # self.map_back = TiledMap(MAP_back)
+        # self.map_img_back = self.map_back.make_map()
+        # self.map_rect_back = self.map_img_back.get_rect()   
+
 
     def new(self):
         # Initialize Var Sprites
         self.all_sprites = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
+        self.pnj = pygame.sprite.Group()
         # #Load Game Sounds
         pygame.mixer.music.load(MUSIC)
         pygame.mixer.music.set_volume(0.4)
         # pygame.mixer.music.set_volume(0.4)
-        ###################################################
-        # Construct Map
-        # for row, tiles in enumerate(self.map.data):
-        #     for col, tile in enumerate(tiles):
-        #         if tile == 'W':
-        #             Wall(self, col, row)
-        #         if tile == 'S':
-        #             self.player = Player(self, col, row)
-        # title Object -> Dictionnaire crée par txm par les Objects
-        for title_object in self.map.tmxdata.objects:
-            if title_object.name == 'player':
-                self.player = Player(self, title_object.x, title_object.y)
-            if title_object.name == 'wall':
-                Obstacle(self, title_object.x, title_object.y, title_object.width, title_object.height)
+
+        for tile_object in self.map.tmxdata.objects:
+            if tile_object.name == 'player':
+                self.player = Player(self, tile_object.x, tile_object.y)
+            if tile_object.name == 'pnj':
+                Pnj(self, tile_object.x, tile_object.y)
+            if tile_object.name == 'wall':
+                Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             self.draw_debug = False
         # Set Camera
         self.camera = Camera(self.map.width, self.map.height)
-
-        ###################################################
-
 
 
     def quit(self):
@@ -89,21 +86,25 @@ class Game:
 
 
     def draw(self):
-        ###################################################
-        # Set couleur fond écran
-        # self.screen.fill(BGCOLOR)
-        self.screen.blit(self.map_img, self.camera.apply_rect(self.map_rect))
-        ###################################################
+           
         # DEBUG Dessine Grid
         # self.draw_grid()
+        self.screen.fill((255, 255, 255))
+
+        #Map Front
+        # self.screen.blit(self.map_img_back, self.camera.apply_rect(self.map_rect_back))
+        self.screen.blit(self.map_img, self.camera.apply_rect(self.map_rect))
+
         # Place All_sprites in the camera zone
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image, self.camera.apply(sprite))
             if self.draw_debug:
-                pygame.draw.rect(self.screen, CYAN, self.camera.apply_rect(sprite.hit_rect), 1)
+                pygame.draw.rect(self.screen, CYAN, self.camera.apply_rect(sprite.rect), 1)
         if self.draw_debug:
-             for wall in self.walls:
+            for wall in self.walls:
                 pygame.draw.rect(self.screen, CYAN, self.camera.apply_rect(wall.rect), 1)
+            pygame.draw.rect(self.screen, WHITE, self.camera.apply(self.player), 2)
+        
         # Always Last action after drawing
         pygame.display.flip()
 
