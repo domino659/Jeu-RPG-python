@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="38">
- <tileset firstgid="1" source="../Assets/Backgrounds/Grass.tsx"/>
- <tileset firstgid="65" source="../Assets/Backgrounds/Stone.tsx"/>
- <tileset firstgid="129" source="../Assets/Backgrounds/Struct.tsx"/>
- <tileset firstgid="385" source="../Assets/Backgrounds/Wall.tsx"/>
- <tileset firstgid="641" source="../Assets/Backgrounds/Plant.tsx"/>
+ <tileset firstgid="1" source="../Assets/Backgrounds/TMX/Grass.tsx"/>
+ <tileset firstgid="65" source="../Assets/Backgrounds/TMX/Stone.tsx"/>
+ <tileset firstgid="129" source="../Assets/Backgrounds/TMX/Struct.tsx"/>
+ <tileset firstgid="385" source="../Assets/Backgrounds/TMX/Wall.tsx"/>
+ <tileset firstgid="641" source="../Assets/Backgrounds/TMX/Plant.tsx"/>
  <layer id="15" name="Grass" width="80" height="80">
   <data encoding="csv">
 1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,
