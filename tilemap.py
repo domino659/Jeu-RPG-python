@@ -2,21 +2,9 @@ import pygame
 import pytmx
 from settings import *
 
-class Map:
-    def __init__(self, filename):
-        # Insert Map.txt into data
-        self.data = []
-        with open(filename) as map:
-            # .strip is here to remove the /n at the end of each line in the txt
-            for line in map:
-                self.data.append(line.strip())
+def collide_hit_rect(one, two):
+    return one.hit_rect.colliderect(two.rect)
 
-        self.tilewidth = len(self.data[0])
-        self.tileheight = len(self.data)
-        self.width = self.tilewidth * TILESIZE
-        self.height = self.tileheight * TILESIZE
-
-###################################################
 class TiledMap:
     def __init__(self, filename):
         tm = pytmx.load_pygame(filename)
@@ -37,7 +25,6 @@ class TiledMap:
         temp_surface = pygame.Surface((self.width, self.height))
         self.render(temp_surface)
         return temp_surface
-###################################################
 
 class Camera:
     def __init__(self, width, height):
@@ -49,10 +36,8 @@ class Camera:
     def apply(self, entity):
         return entity.rect.move(self.camera.topleft)
 
-###################################################
     def apply_rect(self, rect):
-        return rect.move(self.camera.topleft)
-###################################################    
+        return rect.move(self.camera.topleft)    
 
     def update(self, target):
         # Follow Player

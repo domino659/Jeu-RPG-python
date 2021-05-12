@@ -10,6 +10,7 @@ class Player(pygame.sprite.Sprite):
         self.game = game
         self.image = game.player_img
         self.rect = self.image.get_rect()
+        self.rect.center = (x,y)
         # Velocity X and Y
         self.vel = vec(0, 0)
         # Position
@@ -24,20 +25,18 @@ class Player(pygame.sprite.Sprite):
         self.vel = vec(0, 0)
         keys = pygame.key.get_pressed()
         #Movement
-
         if keys[pygame.K_LEFT] or keys[pygame.K_q]:
             self.vel.x = -PLAYER_SPEED
-            self.walking(left_png_list)
+            self.walking_anim(left_png_list)
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.vel.x = PLAYER_SPEED
-            self.walking(right_png_list)
+            self.walking_anim(right_png_list)
         if keys[pygame.K_UP] or keys[pygame.K_z]:
             self.vel.y = -PLAYER_SPEED
-            self.walking(back_png_list)
-            
+            self.walking_anim(back_png_list)
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             self.vel.y = PLAYER_SPEED
-            self.walking(front_png_list)
+            self.walking_anim(front_png_list)
         # Condition to prevent diagonal movement being faster than normaly
         if self.vel.x != 0 and self.vel.y != 0:
             self.vel *= 0.7071
@@ -79,8 +78,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = self.pos.y
         self.collide_with('y')
 
-
-    def walking(self, filename):
+    def walking_anim(self, filename):
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
             self.last_update = now
@@ -91,13 +89,19 @@ class Player(pygame.sprite.Sprite):
 # Création d'un pnj
 class Pnj(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
-        self.groups = game.all_sprites, game.pnj, game.walls
+        self.groups = game.all_sprites, game.pnj
         pygame.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
         self.image = game.pnj_img
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.center = (x,y)
+        self.pos = vec(x, y)
+        speaking = True
 
+    # def speak(self):
+    #     if self.speaking == True:
+    #         self.dialogue = pygame.Rect(0, 0 , 20, 7)
+    #         pygame.rect(self.image, RED, self.dialogue)
 
 class Obstacle(pygame.sprite.Sprite):
         def __init__(self, game, x, y, w, h):
@@ -107,4 +111,3 @@ class Obstacle(pygame.sprite.Sprite):
             self.rect = pygame.Rect(x, y, w, h)
             self.x = x
             self.y = y
-            
