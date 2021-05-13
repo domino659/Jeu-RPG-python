@@ -96,13 +96,21 @@ class Pnj(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (x,y)
         self.pos = vec(x, y)
-        speaking = True
+        self.speaking = False
+        self.target = game.player
+        self.draw_text = game.draw_text
+        self.title_font = FONT
 
-    # def speak(self):
-    #     if self.speaking == True:
-    #         self.dialogue = pygame.Rect(0, 0 , 20, 7)
-    #         pygame.rect(self.image, RED, self.dialogue)
 
+    def speak(self):
+        if abs(self.target.rect.centerx - self.rect.centerx) < 60 and abs(self.target.rect.centery - self.rect.centery) < 60:
+            self.draw_text("I'm a Pnj", self.title_font, 10, WHITE, self.rect.centerx, self.rect.y - 10, align="center")
+            pygame.mixer.Sound(EFFECTS_SOUNDS['voice']).play()
+            # If Win dialogue
+            # self.kill()
+            # If lose
+            # Game over
+            
 class Obstacle(pygame.sprite.Sprite):
         def __init__(self, game, x, y, w, h):
             self.groups = game.walls

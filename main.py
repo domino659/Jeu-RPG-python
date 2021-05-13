@@ -127,11 +127,11 @@ class Game:
             self.playing = False
 
         # Collision joueur pnj
-        hits = pygame.sprite.spritecollide(self.player, self.pnj, False)
-        for hit in hits:
-            self.draw_text("Im a player", self.title_font, 18, WHITE, self.player.rect.centerx, self.player.rect.y, align="center")
-            self.effects_sounds['voice'].play()
-            pygame.display.flip()
+        # hits = pygame.sprite.spritecollide(self.player, self.pnj, False)
+        # for hit in hits:
+            # self.draw_text("Im a player", self.title_font, 18, WHITE, self.player.rect.centerx, self.player.rect.y, align="center")
+            # self.effects_sounds['voice'].play()
+            # pygame.display.flip()
             
 
     # Affichage Grid
@@ -153,6 +153,8 @@ class Game:
 
         # Place All_sprites in the camera zone
         for sprite in self.all_sprites:
+            if isinstance(sprite, Pnj):
+                sprite.speak()
             self.screen.blit(sprite.image, self.camera.apply(sprite))
             if self.draw_debug:
                 pygame.draw.rect(self.screen, CYAN, self.camera.apply_rect(sprite.rect), 1)
@@ -161,7 +163,6 @@ class Game:
                 pygame.draw.rect(self.screen, CYAN, self.camera.apply_rect(wall.rect), 1)
             pygame.draw.rect(self.screen, WHITE, self.camera.apply(self.player), 2)
         
-
         # Always Last action after drawing
         pygame.display.flip()
 
@@ -193,18 +194,18 @@ class Game:
 
 
     def show_start_screen(self):
-        pygame.mixer.music.load(MUSICMENU)
-        pygame.mixer.music.set_volume(0.4)
-        pygame.mixer_music.play(loops=-1)
-        self.screen.fill(BLACK)
-        pygame.time.wait(500)
-        self.draw_text("WELCOME TO", self.title_font, 100, WHITE, WIDTH / 2, HEIGHT * 3 / 8, align="center")
-        self.draw_text("POITIER 2077", self.title_font, 100, WHITE, WIDTH / 2, HEIGHT / 2, align="center")
-        self.draw_text("Press a key to start", self.title_font, 75, WHITE, WIDTH / 2, HEIGHT * 3 / 4, align="center")
-        self.draw_text("Debug Collision: H, Game Over: P ", self.title_font, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
-        pygame.display.flip()
-        self.wait_for_keys()
-
+    #     pygame.mixer.music.load(MUSICMENU)
+    #     pygame.mixer.music.set_volume(0.4)
+    #     pygame.mixer_music.play(loops=-1)
+    #     self.screen.fill(BLACK)
+    #     pygame.time.wait(500)
+    #     self.draw_text("WELCOME TO", self.title_font, 100, WHITE, WIDTH / 2, HEIGHT * 3 / 8, align="center")
+    #     self.draw_text("POITIER 2077", self.title_font, 100, WHITE, WIDTH / 2, HEIGHT / 2, align="center")
+    #     self.draw_text("Press a key to start", self.title_font, 75, WHITE, WIDTH / 2, HEIGHT * 3 / 4, align="center")
+    #     self.draw_text("Debug Collision: H, Game Over: P ", self.title_font, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
+    #     pygame.display.flip()
+    #     self.wait_for_keys()
+        pass
 
     def show_game_over_screen(self):
         pygame.mixer.music.load(MUSICMENU)
