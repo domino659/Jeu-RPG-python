@@ -1,5 +1,5 @@
-from itertools import count
-import pygame
+from tilemap import *
+import pygame, random
 from settings import *
 vec = pygame.math.Vector2
 
@@ -19,13 +19,19 @@ class Player(pygame.sprite.Sprite):
         #Animation
         self.frame = 0
         self.last_update = pygame.time.get_ticks()
-        self.frame_rate = 150
+        self.frame_rate = ANIMATIONSPEED
+        self.count = 1
 
 
     def get_keys(self):
         self.vel = vec(0, 0)
         keys = pygame.key.get_pressed()
         #Movement
+        # while (self.count <= 10):
+        #     self.count += 1
+        #     if self.vel.x > 0 or self.vel.y > 0 :
+        #         pygame.mixer.Sound(self.game.pnj_walk_sound[0]).play()
+
         if keys[pygame.K_LEFT] or keys[pygame.K_q]:
             self.vel.x = -PLAYER_SPEED
             self.walking_anim(left_png_list)
@@ -79,6 +85,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = self.pos.y
         self.collide_with('y')
 
+            
     def walking_anim(self, filename):
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
@@ -89,7 +96,7 @@ class Player(pygame.sprite.Sprite):
 
 # Création d'un pnj
 class Pnj(pygame.sprite.Sprite):
-    def __init__(self, game, x, y):
+    def __init__(self, game, x, y, camera):
         self.groups = game.all_sprites, game.pnj
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
@@ -101,22 +108,27 @@ class Pnj(pygame.sprite.Sprite):
         self.target = game.player
         self.draw_text = game.draw_text
         self.count = 1
-        # Ajouter animation personnage et plusieurs sprites random
-
+        self.camera = camera
+        
+        # Ajouter animation personnage et plusieurs sprites random + plusieurs sons
+    
     # Interagit avec PNJ
     def interaction(self):
         # Si a une certaine distanche affichage nom + cri
+        # random txt random sound
         if abs(self.target.rect.centerx - self.rect.centerx) < 100 and abs(self.target.rect.centery - self.rect.centery) < 100:
-            self.draw_text("I'm a Pnj", FONT, 10, WHITE, self.rect.centerx, self.rect.y, align="s")
+            self.draw_text(TEXT, FONT, 10, WHITE, self.rect.centerx + self.camera.x, self.rect.y + self.camera.y, align="s")
+
             # Limite le son a 1 par pnj
             while (self.count <= 1):
                 self.count += 1
-                pygame.mixer.Sound(EFFECTS_SOUNDS['voice']).play()
+                pygame.mixer.Sound(EFFECTS_SOUNDS['voice']).play().set_volume(0.5)
+
             # Interaction
             if abs(self.target.rect.centerx - self.rect.centerx) < 60 and abs(self.target.rect.centery - self.rect.centery) < 60:
                 # If Win dialogue
                 keystate = pygame.key.get_pressed()
-                if keystate[pygame.K_e]:
+                if keystate[INTERACT]:
                 #If Win
                     self.kill()
                 # If lose

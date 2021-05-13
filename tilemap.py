@@ -1,3 +1,4 @@
+from os import X_OK
 import pygame
 import pytmx
 from settings import *
@@ -32,7 +33,9 @@ class Camera:
         self.camera = pygame.Rect(0, 0, width, height)
         self.width = width
         self.height = height
-    
+        self.x = 0
+        self.y = 0
+
     def apply(self, entity):
         return entity.rect.move(self.camera.topleft)
 
@@ -48,4 +51,6 @@ class Camera:
         y = min(0, y) # Limite Top
         x = max(-(self.width - WIDTH), x) # Limit Right
         y = max(-(self.height - HEIGHT), y) # Limit Bottom
+        self.x = x
+        self.y = y
         self.camera = pygame.Rect(x, y, self.width, self.height)

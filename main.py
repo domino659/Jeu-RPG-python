@@ -48,28 +48,7 @@ class Game:
             text_rect.center = (x, y)
         self.screen.blit(text_surface, text_rect)
 
-    def draw_text_dialogue(self, text, font_name, size, color, bgcolor, x, y, align="nw"):
-            font = pygame.font.Font(font_name, size)
-            text_surface = font.render(text, True, color)
-            text_rect = text_surface.get_rect()
-            if align == "nw":
-                text_rect.topleft = (x, y)
-            if align == "center":
-                text_rect.center = (x, y)
 
-            # Background
-            bg_rect = text_rect.copy()
-            bg_rect.inflate_ip(10, 10)
-
-            # # Frame
-            frame_rect = bg_rect.copy()
-            frame_rect.inflate_ip(4, 4)
-
-            # pygame.draw.rect(color, frame_rect)
-            pygame.draw.rect(bgcolor, bg_rect)
-            self.screen.blit(text_surface, text_rect)
-
-    
     def load_data(self):
         self.player_img = pygame.image.load(PLAYER_IMG)
         self.pnj_img = pygame.image.load(PNJ_IMG)
@@ -78,7 +57,13 @@ class Game:
         self.effects_sounds = {}
         for type in EFFECTS_SOUNDS:
             self.effects_sounds[type] = pygame.mixer.Sound(EFFECTS_SOUNDS[type])
-    
+
+        self.pnj_walk_sound = []
+        for snd in PNJ_WALK_SOUND:
+            s = pygame.mixer.Sound('Assets/Sounds/' + snd)
+            s.set_volume(0.2)
+            self.pnj_walk_sound.append(s)
+
         self.map = TiledMap(MAP)
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()    
@@ -93,9 +78,11 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
         self.pnj = pygame.sprite.Group()
+        # Set Camera
+        self.camera = Camera(self.map.width, self.map.height)
         # #Load Game Sounds
-        pygame.mixer.music.load(MUSIC)
-        pygame.mixer.music.set_volume(0.4)
+        pygame.mixer.music.load(MUSICGAME)
+        pygame.mixer.music.set_volume(VOLMUSICGAME)
         pygame.mixer_music.play(loops=-1)
         for tile_object in self.map.tmxdata.objects:
             obj_center = vec(tile_object.x + tile_object.width / 2,
@@ -103,12 +90,10 @@ class Game:
             if tile_object.name == 'player':
                 self.player = Player(self, obj_center.x, obj_center.y)
             if tile_object.name == 'pnj':
-                Pnj(self, obj_center.x, obj_center.y)
+                Pnj(self, obj_center.x, obj_center.y, self.camera)
             if tile_object.name == 'wall':
                 Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
-            self.draw_debug = False
-        # Set Camera
-        self.camera = Camera(self.map.width, self.map.height)
+            self.draw_debug = False        
 
 
     def quit(self):
@@ -119,9 +104,9 @@ class Game:
     # Update portion of the game loop
     def update(self):
         self.all_sprites.update()
-        # Camera Track Plater
+        # Camera Track Player
         self.camera.update(self.player)
-        # Si je massacre tt les pnj, fun du jeu
+        # Si je massacre tt les pnj, fin du jeu
         if len(self.pnj) == 0:
             game.show_game_win_screen()
             game.new()
@@ -177,42 +162,42 @@ class Game:
             if event.type == pygame.QUIT:
                 self.quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
+                if event.key == ESCAPE:
                     self.quit()
-                if event.key == pygame.K_h:
+                if event.key == DEBUG:
                     self.draw_debug = not self.draw_debug
-                if event.key == pygame.K_p:
+                if event.key == QUIT:
                     self.playing = False
 
 
     def show_start_screen(self):
-        pygame.mixer.music.load(MUSICMENU)
-        pygame.mixer.music.set_volume(0.4)
-        pygame.mixer_music.play(loops=-1)
-        self.screen.fill(BLACK)
-        pygame.time.wait(500)
-        self.draw_text("WELCOME TO", FONT, 100, WHITE, WIDTH / 2, HEIGHT * 3 / 8, align="center")
-        self.draw_text("POITIER 2077", FONT, 100, WHITE, WIDTH / 2, HEIGHT / 2, align="center")
-        self.draw_text("Press a key to start", FONT, 75, WHITE, WIDTH / 2, HEIGHT * 3 / 4, align="center")
-        self.draw_text("Debug Collision: H, Game Over: P ", FONT, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
-        pygame.display.flip()
-        self.wait_for_keys()
-
+        # pygame.mixer.music.load(MUSICMENU)
+        # pygame.mixer.music.set_volume(VOLMUSICMENU)
+        # pygame.mixer_music.play(loops=-1)
+        # self.screen.fill(BLACK)
+        # pygame.time.wait(500)
+        # self.draw_text("WELCOME TO", FONT, 100, WHITE, WIDTH / 2, HEIGHT * 3 / 8, align="center")
+        # self.draw_text("POITIER 2077", FONT, 100, WHITE, WIDTH / 2, HEIGHT / 2, align="center")
+        # self.draw_text("Press a key to start", FONT, 75, WHITE, WIDTH / 2, HEIGHT * 3 / 4, align="center")
+        # self.draw_text("Interact:  " + INTERACT_PRINT + " , Debug Collision: " + DEBUG_PRINT + ", Game Over: " + QUIT_PRINT, FONT, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
+        # pygame.display.flip()
+        # self.wait_for_keys()
+        pass
 
     def show_game_over_screen(self):
         pygame.mixer.music.load(MUSICMENU)
-        pygame.mixer.music.set_volume(0.4)
+        pygame.mixer.music.set_volume(VOLMUSICMENU)
         pygame.mixer_music.play(loops=-1)
         self.screen.fill(BLACK)
         self.draw_text("GAME OVER", FONT, 100, RED, WIDTH /2, HEIGHT / 2, align="center")
         self.draw_text("Press a key to start", FONT, 75, WHITE, WIDTH / 2, HEIGHT * 3 / 4, align="center")
-        pygame.time.wait(1000)
         pygame.display.flip()
+        pygame.time.wait(1000)
         self.wait_for_keys()
 
     def show_game_win_screen(self):
         pygame.mixer.music.load(MUSICMENU)
-        pygame.mixer.music.set_volume(0.4)
+        pygame.mixer.music.set_volume(VOLMUSICMENU)
         pygame.mixer_music.play(loops=-1)
         self.screen.fill(BLACK)
         self.draw_text("YOU WIN", FONT, 100, BLUE, WIDTH /2, HEIGHT / 2, align="center")
