@@ -53,14 +53,13 @@ class Game:
         self.player_img = pygame.image.load(PLAYER_IMG)
         self.pnj_img = pygame.image.load(PNJ_IMG)
 
-
         self.effects_sounds = {}
         for type in EFFECTS_SOUNDS:
             self.effects_sounds[type] = pygame.mixer.Sound(EFFECTS_SOUNDS[type])
 
         self.pnj_walk_sound = []
         for snd in PNJ_WALK_SOUND:
-            s = pygame.mixer.Sound('Assets/Sounds/' + snd)
+            s = pygame.mixer.Sound('Assets/Sounds/Walk/' + snd)
             s.set_volume(0.2)
             self.pnj_walk_sound.append(s)
 
@@ -171,18 +170,18 @@ class Game:
 
 
     def show_start_screen(self):
-        # pygame.mixer.music.load(MUSICMENU)
-        # pygame.mixer.music.set_volume(VOLMUSICMENU)
-        # pygame.mixer_music.play(loops=-1)
-        # self.screen.fill(BLACK)
-        # pygame.time.wait(500)
-        # self.draw_text("WELCOME TO", FONT, 100, WHITE, WIDTH / 2, HEIGHT * 3 / 8, align="center")
-        # self.draw_text("POITIER 2077", FONT, 100, WHITE, WIDTH / 2, HEIGHT / 2, align="center")
-        # self.draw_text("Press a key to start", FONT, 75, WHITE, WIDTH / 2, HEIGHT * 3 / 4, align="center")
-        # self.draw_text("Interact:  " + INTERACT_PRINT + " , Debug Collision: " + DEBUG_PRINT + ", Game Over: " + QUIT_PRINT, FONT, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
-        # pygame.display.flip()
-        # self.wait_for_keys()
-        pass
+        pygame.mixer.music.load(MUSICMENU)
+        pygame.mixer.music.set_volume(VOLMUSICMENU)
+        pygame.mixer_music.play(loops=-1)
+        self.screen.fill(BLACK)
+        pygame.time.wait(500)
+        self.draw_text("WELCOME TO", FONT, 100, WHITE, WIDTH / 2, HEIGHT * 3 / 8, align="center")
+        self.draw_text("POITIER 2077", FONT, 100, WHITE, WIDTH / 2, HEIGHT / 2, align="center")
+        self.draw_text("Press a key to start", FONT, 75, WHITE, WIDTH / 2, HEIGHT * 3 / 4, align="center")
+        self.draw_text("Interact:  " + INTERACT_PRINT + " , Debug Collision: " + DEBUG_PRINT + ", Game Over: " + QUIT_PRINT, FONT, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
+        pygame.display.flip()
+        self.wait_for_keys()
+    
 
     def show_game_over_screen(self):
         pygame.mixer.music.load(MUSICMENU)
@@ -194,6 +193,7 @@ class Game:
         pygame.display.flip()
         pygame.time.wait(1000)
         self.wait_for_keys()
+
 
     def show_game_win_screen(self):
         pygame.mixer.music.load(MUSICMENU)

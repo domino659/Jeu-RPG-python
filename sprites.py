@@ -20,18 +20,15 @@ class Player(pygame.sprite.Sprite):
         self.frame = 0
         self.last_update = pygame.time.get_ticks()
         self.frame_rate = ANIMATIONSPEED
-        self.count = 1
+        self.count = 0
+        self.relance = 0
+        self.sound = False
 
 
     def get_keys(self):
         self.vel = vec(0, 0)
         keys = pygame.key.get_pressed()
         #Movement
-        # while (self.count <= 10):
-        #     self.count += 1
-        #     if self.vel.x > 0 or self.vel.y > 0 :
-        #         pygame.mixer.Sound(self.game.pnj_walk_sound[0]).play()
-
         if keys[pygame.K_LEFT] or keys[pygame.K_q]:
             self.vel.x = -PLAYER_SPEED
             self.walking_anim(left_png_list)
@@ -47,6 +44,17 @@ class Player(pygame.sprite.Sprite):
         # Condition to prevent diagonal movement being faster than normaly
         if self.vel.x != 0 and self.vel.y != 0:
             self.vel *= 0.7071
+
+
+        if self.vel.x > 0 or self.vel.y > 0 :
+            if self.sound == False:
+                self.relance = pygame.time.get_ticks() + 400
+                pygame.mixer.Sound(self.game.pnj_walk_sound[self.count]).play()
+                self.count += 1
+                self.count = self.count%12
+                self.sound = True
+            if pygame.time.get_ticks() > self.relance:
+                self.sound = False               
 
 
     # Colide check for x and y
@@ -84,8 +92,8 @@ class Player(pygame.sprite.Sprite):
         self.collide_with('x')
         self.rect.y = self.pos.y
         self.collide_with('y')
-
             
+
     def walking_anim(self, filename):
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate:
@@ -110,19 +118,17 @@ class Pnj(pygame.sprite.Sprite):
         self.count = 1
         self.camera = camera
         
-        # Ajouter animation personnage et plusieurs sprites random + plusieurs sons
-    
+
     # Interagit avec PNJ
     def interaction(self):
-        # Si a une certaine distanche affichage nom + cri
-        # random txt random sound
+        
         if abs(self.target.rect.centerx - self.rect.centerx) < 100 and abs(self.target.rect.centery - self.rect.centery) < 100:
             self.draw_text(TEXT, FONT, 10, WHITE, self.rect.centerx + self.camera.x, self.rect.y + self.camera.y, align="s")
 
             # Limite le son a 1 par pnj
             while (self.count <= 1):
                 self.count += 1
-                pygame.mixer.Sound(EFFECTS_SOUNDS['voice']).play().set_volume(0.5)
+                pygame.mixer.Sound(EFFECTS_SOUNDS['voice']).play()
 
             # Interaction
             if abs(self.target.rect.centerx - self.rect.centerx) < 60 and abs(self.target.rect.centery - self.rect.centery) < 60:
