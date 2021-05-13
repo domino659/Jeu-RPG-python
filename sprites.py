@@ -101,17 +101,24 @@ class Pnj(pygame.sprite.Sprite):
         self.target = game.player
         self.draw_text = game.draw_text
         self.count = 1
+        # Ajouter animation personnage et plusieurs sprites random
 
     # Interagit avec PNJ
     def interaction(self):
+        # Si a une certaine distanche affichage nom + cri
         if abs(self.target.rect.centerx - self.rect.centerx) < 100 and abs(self.target.rect.centery - self.rect.centery) < 100:
             self.draw_text("I'm a Pnj", FONT, 10, WHITE, self.rect.centerx, self.rect.y, align="s")
+            # Limite le son a 1 par pnj
             while (self.count <= 1):
                 self.count += 1
                 pygame.mixer.Sound(EFFECTS_SOUNDS['voice']).play()
+            # Interaction
             if abs(self.target.rect.centerx - self.rect.centerx) < 60 and abs(self.target.rect.centery - self.rect.centery) < 60:
                 # If Win dialogue
-                self.kill()
+                keystate = pygame.key.get_pressed()
+                if keystate[pygame.K_e]:
+                #If Win
+                    self.kill()
                 # If lose
                 # Lose Hp, or Game over
             

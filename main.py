@@ -163,7 +163,6 @@ class Game:
     def run(self):
         # Gamme LOOP
         self.playing = True
-        
         while self.playing:
             # Dt -> DetlaTime (allow real time animation)
             self.dt = self.clock.tick(FPS) / 1000
@@ -187,18 +186,18 @@ class Game:
 
 
     def show_start_screen(self):
-    #     pygame.mixer.music.load(MUSICMENU)
-    #     pygame.mixer.music.set_volume(0.4)
-    #     pygame.mixer_music.play(loops=-1)
-    #     self.screen.fill(BLACK)
-    #     pygame.time.wait(500)
-    #     self.draw_text("WELCOME TO", FONT, 100, WHITE, WIDTH / 2, HEIGHT * 3 / 8, align="center")
-    #     self.draw_text("POITIER 2077", FONT, 100, WHITE, WIDTH / 2, HEIGHT / 2, align="center")
-    #     self.draw_text("Press a key to start", FONT, 75, WHITE, WIDTH / 2, HEIGHT * 3 / 4, align="center")
-    #     self.draw_text("Debug Collision: H, Game Over: P ", FONT, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
-    #     pygame.display.flip()
-    #     self.wait_for_keys()
-        pass
+        pygame.mixer.music.load(MUSICMENU)
+        pygame.mixer.music.set_volume(0.4)
+        pygame.mixer_music.play(loops=-1)
+        self.screen.fill(BLACK)
+        pygame.time.wait(500)
+        self.draw_text("WELCOME TO", FONT, 100, WHITE, WIDTH / 2, HEIGHT * 3 / 8, align="center")
+        self.draw_text("POITIER 2077", FONT, 100, WHITE, WIDTH / 2, HEIGHT / 2, align="center")
+        self.draw_text("Press a key to start", FONT, 75, WHITE, WIDTH / 2, HEIGHT * 3 / 4, align="center")
+        self.draw_text("Debug Collision: H, Game Over: P ", FONT, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
+        pygame.display.flip()
+        self.wait_for_keys()
+
 
     def show_game_over_screen(self):
         pygame.mixer.music.load(MUSICMENU)
