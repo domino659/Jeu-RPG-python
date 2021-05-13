@@ -1,3 +1,4 @@
+from itertools import count
 import pygame
 from settings import *
 vec = pygame.math.Vector2
@@ -99,18 +100,22 @@ class Pnj(pygame.sprite.Sprite):
         self.speaking = False
         self.target = game.player
         self.draw_text = game.draw_text
-        self.title_font = FONT
+        self.count = 1
 
-
-    def speak(self):
-        if abs(self.target.rect.centerx - self.rect.centerx) < 60 and abs(self.target.rect.centery - self.rect.centery) < 60:
-            self.draw_text("I'm a Pnj", self.title_font, 10, WHITE, self.rect.centerx, self.rect.y - 10, align="center")
-            pygame.mixer.Sound(EFFECTS_SOUNDS['voice']).play()
-            # If Win dialogue
-            # self.kill()
-            # If lose
-            # Game over
+    # Interagit avec PNJ
+    def interaction(self):
+        if abs(self.target.rect.centerx - self.rect.centerx) < 100 and abs(self.target.rect.centery - self.rect.centery) < 100:
+            self.draw_text("I'm a Pnj", FONT, 10, WHITE, self.rect.centerx, self.rect.y, align="s")
+            while (self.count <= 1):
+                self.count += 1
+                pygame.mixer.Sound(EFFECTS_SOUNDS['voice']).play()
+            if abs(self.target.rect.centerx - self.rect.centerx) < 60 and abs(self.target.rect.centery - self.rect.centery) < 60:
+                # If Win dialogue
+                self.kill()
+                # If lose
+                # Lose Hp, or Game over
             
+
 class Obstacle(pygame.sprite.Sprite):
         def __init__(self, game, x, y, w, h):
             self.groups = game.walls
