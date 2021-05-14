@@ -51,7 +51,6 @@ class Game:
 
     def load_data(self):
         self.player_img = pygame.image.load(PLAYER_IMG)
-        self.pnj_img = pygame.image.load(PNJ_IMG)
 
         self.effects_sounds = {}
         for type in EFFECTS_SOUNDS:

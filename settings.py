@@ -1,15 +1,15 @@
 import pygame
 
 # Get Screen Info
-SCREEN = pygame.display.set_mode()
-WIDTH, HEIGHT = SCREEN.get_size()
+# SCREEN = pygame.display.set_mode()
+# WIDTH, HEIGHT = SCREEN.get_size()
 
 # Screen settings
 # WIDTH = 1920 
 # HEIGHT = 1080
 
-# WIDTH = 1280
-# HEIGHT = 720
+WIDTH = 1280
+HEIGHT = 720
 
 # Input
 ESCAPE = pygame.K_ESCAPE
@@ -22,7 +22,7 @@ INTERACT_PRINT = 'E'
 QUIT_PRINT = 'P'
 
 FPS = 60
-TITLE = "Jeux d'Insultes"
+TITLE = "Jeux Type RPG"
 MAP = 'Map/map.tmx'
 MAP_back = 'Map/map_back.tmx'
 FONT = 'Assets/Font/SuperLegendBoy.ttf'
@@ -43,14 +43,16 @@ ANIMATIONSPEED = 150
 PLAYER_IMG = 'Assets/Actor/hero/front2.png'
 
 # PNJ
-PNJ_IMG = 'Assets/Actor/pnj/pnj1.png'
+PNJ_IMG_GIRL = ['Assets/Actor/pnj/pnjgirl0.png', 'Assets/Actor/pnj/pnjgirl1.png', 'Assets/Actor/pnj/pnjgirl2.png', 'Assets/Actor/pnj/pnjgirl3.png', 'Assets/Actor/pnj/pnjgirl4.png']
+PNJ_IMG_MALE = ['Assets/Actor/pnj/pnjmale0.png', 'Assets/Actor/pnj/pnjmale1.png', 'Assets/Actor/pnj/pnjmale2.png', 'Assets/Actor/pnj/pnjmale3.png', 'Assets/Actor/pnj/pnjmale4.png']
 PNJ_BRONTIS = 'Assets/Actor/pnj/feebrontis.png'
 
 # Text
-TEXT = "I'm a Pnj"
+TEXTS = ['Hello Traveler', 'You want to fight', 'Bring it on !', "I'm a Pnj, yes I know that my life has no meaning"]
 
 # Sounds
-EFFECTS_SOUNDS = {'voice': 'Assets/Sounds/attack1.wav'}
+EFFECTS_SOUNDS = {'voicef': 'Assets/Sounds/voicef.wav',
+                  'voicem': 'Assets/Sounds/voicem.wav'}
 
 PNJ_WALK_SOUND = ['walk0.wav', 'walk1.wav', 'walk2.wav', 'walk3.wav', 'walk4.wav', 'walk5.wav', 'walk6.wav', 'walk7.wav', 'walk8.wav', 'walk9.wav']
 

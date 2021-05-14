@@ -108,7 +108,14 @@ class Pnj(pygame.sprite.Sprite):
         self.groups = game.all_sprites, game.pnj
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = game.pnj_img
+        # Selection Sexe
+        self.sex = random.randint(0,1)
+        # Attribution image en fonction du sexe
+        if self.sex == 0:
+            self.img = PNJ_IMG_GIRL[random.randint(0, 4)]
+        if self.sex == 1:
+            self.img = PNJ_IMG_MALE[random.randint(0, 4)]
+        self.image = pygame.image.load(self.img)
         self.rect = self.image.get_rect()
         self.rect.center = (x,y)
         self.pos = vec(x, y)
@@ -117,18 +124,20 @@ class Pnj(pygame.sprite.Sprite):
         self.draw_text = game.draw_text
         self.count = 1
         self.camera = camera
-        
+        self.text = random.choice(TEXTS)    
 
     # Interagit avec PNJ
     def interaction(self):
-        
         if abs(self.target.rect.centerx - self.rect.centerx) < 100 and abs(self.target.rect.centery - self.rect.centery) < 100:
-            self.draw_text(TEXT, FONT, 10, WHITE, self.rect.centerx + self.camera.x, self.rect.y + self.camera.y, align="s")
+            self.draw_text(self.text, FONT, 10, WHITE, self.rect.centerx + self.camera.x, self.rect.y + self.camera.y, align="s")
 
             # Limite le son a 1 par pnj
             while (self.count <= 1):
                 self.count += 1
-                pygame.mixer.Sound(EFFECTS_SOUNDS['voice']).play()
+                if self.sex == 0:
+                    pygame.mixer.Sound(EFFECTS_SOUNDS['voicef']).play()
+                if self.sex == 1:
+                    pygame.mixer.Sound(EFFECTS_SOUNDS['voicem']).play()
 
             # Interaction
             if abs(self.target.rect.centerx - self.rect.centerx) < 60 and abs(self.target.rect.centery - self.rect.centery) < 60:
