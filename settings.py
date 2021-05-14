@@ -52,7 +52,7 @@ TEXT = "I'm a Pnj"
 # Sounds
 EFFECTS_SOUNDS = {'voice': 'Assets/Sounds/attack1.wav'}
 
-PNJ_WALK_SOUND = ['walk0.wav', 'walk1.wav', 'walk2.wav', 'walk3.wav', 'walk4.wav', 'walk5.wav', 'walk6.wav', 'walk7.wav', 'walk8.wav', 'walk9.wav', 'walk10.wav', 'walk11.wav']
+PNJ_WALK_SOUND = ['walk0.wav', 'walk1.wav', 'walk2.wav', 'walk3.wav', 'walk4.wav', 'walk5.wav', 'walk6.wav', 'walk7.wav', 'walk8.wav', 'walk9.wav']
 
 # Player Imgs
 front_png_list = ['Assets/Actor/hero/front1.png', 'Assets/Actor/hero/front2.png', 'Assets/Actor/hero/front3.png']

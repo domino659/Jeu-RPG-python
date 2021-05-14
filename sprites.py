@@ -46,12 +46,12 @@ class Player(pygame.sprite.Sprite):
             self.vel *= 0.7071
 
 
-        if self.vel.x > 0 or self.vel.y > 0 :
+        if abs(self.vel.x) > 0 or abs(self.vel.y) > 0:
             if self.sound == False:
                 self.relance = pygame.time.get_ticks() + 400
                 pygame.mixer.Sound(self.game.pnj_walk_sound[self.count]).play()
                 self.count += 1
-                self.count = self.count%12
+                self.count = self.count%10
                 self.sound = True
             if pygame.time.get_ticks() > self.relance:
                 self.sound = False               
