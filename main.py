@@ -177,7 +177,7 @@ class Game:
         self.draw_text("WELCOME TO", FONT, 100, WHITE, WIDTH / 2, HEIGHT * 3 / 8, align="center")
         self.draw_text("POITIER 2077", FONT, 100, WHITE, WIDTH / 2, HEIGHT / 2, align="center")
         self.draw_text("Press a key to start", FONT, 75, WHITE, WIDTH / 2, HEIGHT * 3 / 4, align="center")
-        self.draw_text("Interact:  " + INTERACT_PRINT + " , Debug Collision: " + DEBUG_PRINT + ", Game Over: " + QUIT_PRINT, FONT, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
+        self.draw_text("Interact: " + INTERACT_PRINT + " , Debug Collision: " + DEBUG_PRINT + ", Game Over: " + QUIT_PRINT, FONT, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
         pygame.display.flip()
         self.wait_for_keys()
     
