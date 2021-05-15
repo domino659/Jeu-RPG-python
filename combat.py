@@ -18,7 +18,7 @@ color_black = (0,0,0)
 width = screen.get_width() 
 height = screen.get_height() 
 
-fond_combat = pygame.image.load('fond.jpg')
+fond_combat = pygame.image.load('Assets/Backgrounds/fond.jpg')
 screen.blit(fond_combat , (0, 0))
 
 smallfont = pygame.font.SysFont('Corbel',35) 
