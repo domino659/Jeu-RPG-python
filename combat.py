@@ -57,10 +57,9 @@ class Joueur:
 
     def Tour_joueur(self, tableau_mots):
 
-        afficher_tableau(tableau_mots)
+        if self.phrase_finie == False :
 
-        if self.phrase_finie != True :
-
+            afficher_tableau(tableau_mots)
             choix_mot = False
 
             while choix_mot == False :
@@ -86,71 +85,10 @@ class Joueur:
                                 choix_mot = True
                         except:
                             print("Pas de mot ici")
-                    
 
-                    # if 720 <= mouse[0] <= 720+480 and 200 <= mouse[1] <= 180+72:
-                    #     if len(tableau_mots) >= 1 :
-                    #         if check_phrase(self.phrase, tableau_mots[0]) :
-                    #             self.phrase.append(tableau_mots[0])
-                    #             del tableau_mots[0]
-                    #             choix_mot = True
-                    # if 720 <= mouse[0] <= 720+480 and 252 <= mouse[1] <= 252+72: 
-                    #     if len(tableau_mots) >= 2 :
-                    #         if check_phrase(self.phrase, tableau_mots[1]) :
-                    #             self.phrase.append(tableau_mots[1])
-                    #             del tableau_mots[1]
-                    #             choix_mot = True
-                    # if 720 <= mouse[0] <= 720+480 and 324 <= mouse[1] <= 324+72:
-                    #     if len(tableau_mots) >= 3 :
-                    #         if check_phrase(self.phrase, tableau_mots[2]) :
-                    #             self.phrase.append(tableau_mots[2])
-                    #             del tableau_mots[2]
-                    #             choix_mot = True
-                    # if 720 <= mouse[0] <= 720+480 and 396 <= mouse[1] <= 396+72:
-                    #     if len(tableau_mots) >= 4 :
-                    #         if check_phrase(self.phrase, tableau_mots[3]) :
-                    #             self.phrase.append(tableau_mots[3])
-                    #             del tableau_mots[3]
-                    #             choix_mot = True
-                    # if 720 <= mouse[0] <= 720+480 and 468 <= mouse[1] <= 468+72:
-                    #     if len(tableau_mots) >= 5 :
-                    #         if check_phrase(self.phrase, tableau_mots[4]) : 
-                    #             self.phrase.append(tableau_mots[4])
-                    #             del tableau_mots[4]
-                    #             choix_mot = True
-                    # if 720 <= mouse[0] <= 720+480 and 540 <= mouse[1] <= 540+72:
-                    #     if len(tableau_mots) >= 6 :
-                    #         if check_phrase(self.phrase, tableau_mots[5]) :
-                    #             self.phrase.append(tableau_mots[5])
-                    #             del tableau_mots[5]
-                    #             choix_mot = True
-                    # if 720 <= mouse[0] <= 720+480 and 612 <= mouse[1] <= 612+72: 
-                    #     if len(tableau_mots) >= 7 :
-                    #         if check_phrase(self.phrase, tableau_mots[6]) :
-                    #             self.phrase.append(tableau_mots[6])
-                    #             del tableau_mots[6]
-                    #             choix_mot = True
-                    # if 720 <= mouse[0] <= 720+480 and 684 <= mouse[1] <= 684+72: 
-                    #     if len(tableau_mots) >= 8 :
-                    #         if check_phrase(self.phrase, tableau_mots[7]) :
-                    #             self.phrase.append(tableau_mots[7])
-                    #             del tableau_mots[7]
-                    #             choix_mot = True
-                    # if 720 <= mouse[0] <= 720+480 and 756 <= mouse[1] <= 756+72:
-                    #     if len(tableau_mots) >= 9 : 
-                    #         if check_phrase(self.phrase, tableau_mots[8]) :
-                    #             self.phrase.append(tableau_mots[8])
-                    #             del tableau_mots[8]
-                    #             choix_mot = True
-                    # if 720 <= mouse[0] <= 720+480 and 828 <= mouse[1] <= 828+72: 
-                    #     if len(tableau_mots) >= 10 :
-                    #         if check_phrase(self.phrase, tableau_mots[9]) :
-                    #             self.phrase.append(tableau_mots[9])
-                    #             del tableau_mots[9]     
-                    #             choix_mot = True                      
-                    # if 840 <= mouse[0] <= 840+240 and 955 <= mouse[1] <= 955+60:
-                    #     self.phrase_finie = True
-                    #     choix_mot = True 
+                    if 840 <= mouse[0] <= 840+240 and 955 <= mouse[1] <= 955+60:
+                        self.phrase_finie = True
+                        choix_mot = True 
 
 def check_phrase(phrase, mot): #Vérifie si le mot choisit est logique par rapport au mot précédent
     indice = len(phrase)
@@ -283,6 +221,7 @@ def afficher_phrase(joueur, nombre) : #Affiche les phrases des deux joueurs
             print("Pas encore de phrase")
         phrase = "".join(phrase)
         screen.blit(Texte(phrase), (1500+50, 500))
+
 def redraw():
         screen.blit(fond_combat , (0, 0))
         pygame.draw.rect(screen,color_grey,[81,64,240,60]) #Nom 1
@@ -302,12 +241,13 @@ def redraw():
         screen.blit(Texte("Nom 1") , (81, 64)) #Nom 1
         screen.blit(Texte("Nom 2") , (1599, 64)) #Nom 2
         screen.blit(Texte("Finir phrase"), (840, 955)) #Finir phrase
+
 def combat(joueur1, joueur2):
 
     tableau_mots = creer_tableau()
 
     while joueur1.pv > 0 and joueur2.pv >0 :
-        while (len(tableau_mots) > 0 and (joueur1.phrase_finie == False and joueur2.phrase_finie == False)):       
+        while (len(tableau_mots) > 0 and (joueur1.phrase_finie == False or joueur2.phrase_finie == False)):       
             joueur1.Tour_joueur(tableau_mots)
             redraw()
             afficher_phrase(joueur1, 1)
@@ -322,7 +262,9 @@ def combat(joueur1, joueur2):
         tableau_mots = creer_tableau()
 
         joueur1.phrase = []
+        joueur1.phrase_finie = False
         joueur2.phrase = []
+        joueur2.phrase_finie = False
 
 J1 = Joueur()
 J1.classe = 'humain'
