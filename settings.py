@@ -1,12 +1,12 @@
 import pygame
 
 # Get Screen Info
-SCREEN = pygame.display.set_mode()
-WIDTH, HEIGHT = SCREEN.get_size()
+# SCREEN = pygame.display.set_mode()
+# WIDTH, HEIGHT = SCREEN.get_size()
 
 # Screen settings
-# WIDTH = 1920 
-# HEIGHT = 1080
+WIDTH = 1920 
+HEIGHT = 1080
 
 # WIDTH = 1280
 # HEIGHT = 720
