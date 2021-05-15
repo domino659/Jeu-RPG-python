@@ -29,7 +29,7 @@ FONT = 'Assets/Font/SuperLegendBoy.ttf'
 
 # Music Track
 MUSICGAME = 'Assets/Music/gamemusic.mp3'
-VOLMUSICGAME = 0.2
+VOLMUSICGAME = 0.8
 MUSICMENU = 'Assets/Music/mainmenue.mp3'
 VOLMUSICMENU = 0.2
 
