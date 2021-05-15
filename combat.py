@@ -1,5 +1,6 @@
 from os import system
 from random import *
+from dico import *
 from math import floor
 import pygame 
 import sys 
@@ -19,30 +20,21 @@ width = screen.get_width()
 height = screen.get_height() 
 
 fond_combat = pygame.image.load('Assets/Backgrounds/fond_combat.jpg')
+img_perso = pygame.image.load("Assets/Actor/Combat/persofou.png")
+img_perso2 = pygame.image.load("Assets/Actor/Combat/persofou2.png")
+contour = pygame.image.load("Assets/Backgrounds/contour.png")
+contour_sprite = pygame.transform.scale(contour, (472, 835))
+contour_tableau = pygame.transform.scale(contour,(480, 720))
+perso1 = pygame.transform.scale(img_perso, (402, 745))
+perso2 = pygame.transform.scale(img_perso2, (402, 745))
 screen.blit(fond_combat , (0, 0))
 
-smallfont = pygame.font.SysFont('Corbel',35) 
+smallfont = pygame.font.SysFont('Corbel',35)
+font_phrase = pygame.font.SysFont('Corbel',30)
 
 def Texte(texte) :
     text = smallfont.render(texte , True , color) 
     return text
-
-dictionnaire = {
-    "ta mere" : "sujet",
-    "ton pere" : "sujet",
-    "ta soeur" : "sujet",
-    "ton frere" : "sujet",
-    "un chien" : "sujet",
-    "un lama" : "sujet",
-    "est moche" : "verbe",
-    "pue" : "verbe",
-    "suce" : "verbe",
-    "mange" : "verbe",
-    "et" : "liaison",
-    "sur" : "liaison",
-    "en string" : 'complement',
-    "en slip" : 'complement',
-}
 
 class Joueur:
 
@@ -100,10 +92,8 @@ def check_phrase(phrase, mot): #Vérifie si le mot choisit est logique par rappo
                 return False
             elif dictionnaire[phrase[indice-1]] == "verbe" :
                 return True
-            elif dictionnaire[phrase[indice-1]] == "complement" :
-                return False
             elif dictionnaire[phrase[indice-1]] == "liaison" :
-                return False
+                return True
             else : print("le mot ne possede pas de type")
 
     if dictionnaire[mot] == "verbe" :
@@ -114,24 +104,8 @@ def check_phrase(phrase, mot): #Vérifie si le mot choisit est logique par rappo
                 return True
             elif dictionnaire[phrase[indice-1]] == "verbe" :
                 return False
-            elif dictionnaire[phrase[indice-1]] == "complement" :
-                return False
             elif dictionnaire[phrase[indice-1]] == "liaison" :
                 return True
-            else : print("le mot ne possede pas de type")
-
-    if dictionnaire[mot] == "complement" :
-        if indice == 0 :
-            return False
-        else :
-            if dictionnaire[phrase[indice-1]] == "sujet" :
-                return False
-            elif dictionnaire[phrase[indice-1]] == "verbe" :
-                return True
-            elif dictionnaire[phrase[indice-1]] == "complement" :
-                return False
-            elif dictionnaire[phrase[indice-1]] == "liaison" :
-                return False
             else : print("le mot ne possede pas de type")
 
     if dictionnaire[mot] == "liaison" :
@@ -142,8 +116,6 @@ def check_phrase(phrase, mot): #Vérifie si le mot choisit est logique par rappo
                 return True
             elif dictionnaire[phrase[indice-1]] == "verbe" :
                 return True
-            elif dictionnaire[phrase[indice-1]] == "complement" :
-                return True
             elif dictionnaire[phrase[indice-1]] == "liaison" :
                 return False
             else : print("le mot ne possede pas de type")
@@ -152,29 +124,32 @@ def check_phrase(phrase, mot): #Vérifie si le mot choisit est logique par rappo
 def creer_tableau(): #Crée et retourne le tableau des mots utilisables en combat en évitant de mettre deux fois les memes mots
 
     tableau_mots = []
-    dico = []
-    for key, v in dictionnaire.items() :
-        dico.append(key)
     while len(tableau_mots) < 10 :
-        n_mot = randint(0, len(dico)-1)
-        tableau_mots.append(dico[n_mot])  
+        if len(tableau_mots) <= 3 :
+            mot = choice(list(dictionnaire.items()))
+            if mot[1] == "sujet" :
+                tableau_mots.append(mot[0])
+        elif 3 < len(tableau_mots) <= 7 :
+            mot = choice(list(dictionnaire.items()))
+            if mot[1] == "verbe" :
+                tableau_mots.append(mot[0])
+        elif len(tableau_mots) > 7 :
+            mot = choice(list(dictionnaire.items()))
+            if mot[1] == "liaison" :
+                tableau_mots.append(mot[0])
     return tableau_mots
 
 def afficher_tableau(tableau_mots):
 
-    # for i in range(10) :
-    #     pygame.draw.rect(screen,color_grey,[720,180+72*i,480,72]
-    s = pygame.Surface((480,720))
-    s.fill(color_black)
-    s.set_alpha(200) 
-    screen.blit(s, (720,180))
+    screen.blit(contour_tableau, (720,180))
 
     for i in range(len(tableau_mots)) :
-        screen.blit(Texte(tableau_mots[i]) , (760, 200+72*i)) 
+        screen.blit(Texte(tableau_mots[i]) , (770, 200+72*i)) 
 
     pygame.display.update()
 
 def calcul_degats(joueur1, joueur2): #Calcule et applique les dégats aux deux joueurs / si la fin de phrase n'est pas logique -1 dégats (ou 0?)
+
     degats_j1 = 0
     check_v = False
     for mots in joueur1.phrase:
@@ -193,8 +168,6 @@ def calcul_degats(joueur1, joueur2): #Calcule et applique les dégats aux deux j
                 joueur2.pv -= degats_j1 - 1
         elif dictionnaire[joueur1.phrase[len(joueur1.phrase)-1]] == "verbe" :
             joueur2.pv -= degats_j1
-        elif dictionnaire[joueur1.phrase[len(joueur1.phrase)-1]] == "complément" :
-            joueur2.pv -= degats_j1
         else :
             joueur2.pv -= degats_j1 - 1
 
@@ -210,37 +183,54 @@ def afficher_phrase(joueur, nombre) : #Affiche les phrases des deux joueurs
         except:
             print("Pas encore de phrase")
         phrase = "".join(phrase)
-        screen.blit(Texte(phrase), (50, 500))
+        screen.blit(font_phrase.render(phrase , True , color) , (100, 950))
     else : 
         for i in range(len(joueur.phrase)) :
-            phrase += str(joueur.phrase[i])
+            phrase += str(joueur.phrase[i] + " ")
         phrase = list(phrase)
         try:
             phrase[0] = phrase[0].upper()
         except:
             print("Pas encore de phrase")
         phrase = "".join(phrase)
-        screen.blit(Texte(phrase), (1500+50, 500))
 
-def redraw():
-        screen.blit(fond_combat , (0, 0))
-        pygame.draw.rect(screen,color_grey,[81,64,240,60]) #Nom 1
-        # pygame.draw.rect(screen,color_black,[81,180,472,835]) #Sprite 1
-        s = pygame.Surface((472,835))
-        s.fill(color_black)
-        s.set_alpha(200) 
-        screen.blit(s, (81,180))
-        pygame.draw.rect(screen,color_grey,[1599,64,240,60]) #Nom 2
-        # pygame.draw.rect(screen,color_black,[1367,180,472,835]) #Sprite 2 
-        s = pygame.Surface((472,835))
-        s.fill(color_black)
-        s.set_alpha(200)
-        screen.blit(s, (1367,180))
-        pygame.draw.rect(screen,color_grey,[840,955,240,60]) #Bouton finir phrase
+        screen.blit(font_phrase.render(phrase , True , color) , (1400, 950))
 
-        screen.blit(Texte("Nom 1") , (81, 64)) #Nom 1
-        screen.blit(Texte("Nom 2") , (1599, 64)) #Nom 2
-        screen.blit(Texte("Finir phrase"), (840, 955)) #Finir phrase
+def redraw(joueur1, joueur2):
+
+    screen.blit(fond_combat , (0, 0))
+    #pygame.draw.rect(screen,color_grey,[81,64,240,60]) #Nom 1
+    s = pygame.Surface((472,60))
+    s.fill(color_black)
+    s.set_alpha(200)
+    screen.blit(s, (81,64))
+    # pygame.draw.rect(screen,color_black,[81,180,472,835]) #Sprite 1
+    screen.blit(contour_sprite, (81,180))
+    #pygame.draw.rect(screen,color_grey,[1599,64,240,60]) #Nom 2
+    s = pygame.Surface((472,60))
+    s.fill(color_black)
+    s.set_alpha(200)
+    screen.blit(s, (1367,64))
+    # pygame.draw.rect(screen,color_black,[1367,180,472,835]) #Sprite 2 
+    screen.blit(contour_sprite, (1367,180))
+    #pygame.draw.rect(screen,color_grey,[840,955,240,60]) #Bouton finir phrase
+    s = pygame.Surface((240,60))
+    s.fill(color_black)
+    s.set_alpha(200)
+    screen.blit(s, (840,955))
+
+    pv = str(joueur1.pv)
+    screen.blit(Texte(joueur1.nom+" > "+pv+" hp") , (101, 74)) #Nom 1
+    pv = str(joueur2.pv)
+    screen.blit(Texte(joueur2.nom+" > "+pv+" hp") , (1387, 74)) #Nom 2
+    screen.blit(Texte("Finir phrase"), (840, 955)) #Finir phrase
+
+    afficher_phrase(joueur1, 1)
+    afficher_phrase(joueur2, 2)
+
+    screen.blit(perso1 , (121, 200))
+    screen.blit(pygame.transform.flip(perso2, True, False), (1407,200))
+
 
 def combat(joueur1, joueur2):
 
@@ -249,13 +239,9 @@ def combat(joueur1, joueur2):
     while joueur1.pv > 0 and joueur2.pv >0 :
         while (len(tableau_mots) > 0 and (joueur1.phrase_finie == False or joueur2.phrase_finie == False)):       
             joueur1.Tour_joueur(tableau_mots)
-            redraw()
-            afficher_phrase(joueur1, 1)
-            afficher_phrase(joueur2, 2)
+            redraw(joueur1, joueur2)
             joueur2.Tour_joueur(tableau_mots)
-            redraw()
-            afficher_phrase(joueur1, 1)
-            afficher_phrase(joueur2, 2) 
+            redraw(joueur1, joueur2)
 
         calcul_degats(joueur1,joueur2)
         calcul_degats(joueur2,joueur1)
@@ -265,15 +251,4 @@ def combat(joueur1, joueur2):
         joueur1.phrase_finie = False
         joueur2.phrase = []
         joueur2.phrase_finie = False
-
-J1 = Joueur()
-J1.classe = 'humain'
-J1.nom = "zeubiumaru"
-
-J2 = Joueur()
-J2.nom="conarman"
-
-mouse = pygame.mouse.get_pos() 
-
-redraw()     
-combat(J1,J2)
+        redraw(joueur1, joueur2)

@@ -1,6 +1,7 @@
 from tilemap import *
 import pygame, random
 from settings import *
+from combat import *
 vec = pygame.math.Vector2
 
 # Création d'un joueur
@@ -141,9 +142,21 @@ class Pnj(pygame.sprite.Sprite):
 
             # Interaction
             if abs(self.target.rect.centerx - self.rect.centerx) < 60 and abs(self.target.rect.centery - self.rect.centery) < 60:
-                # If Win dialogue
+                # If Win dialogue           
+                
                 keystate = pygame.key.get_pressed()
                 if keystate[INTERACT]:
+                    
+                    J1 = Joueur()
+                    J1.classe = 'humain'
+                    J1.nom = "zeubiumaru"
+
+                    J2 = Joueur()
+                    J2.nom="conarman"
+
+                    redraw(J1,J2)     
+                    combat(J1,J2)
+                    
                 #If Win
                     self.kill()
                 # If lose
