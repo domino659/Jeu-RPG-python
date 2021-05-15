@@ -47,7 +47,7 @@ PNJ_IMG_GIRL = ['Assets/Actor/pnj/pnjgirl0.png', 'Assets/Actor/pnj/pnjgirl1.png'
 PNJ_IMG_MALE = ['Assets/Actor/pnj/pnjmale0.png', 'Assets/Actor/pnj/pnjmale1.png', 'Assets/Actor/pnj/pnjmale2.png', 'Assets/Actor/pnj/pnjmale3.png', 'Assets/Actor/pnj/pnjmale4.png']    
 
 # Text
-TEXTS = ['Hello Traveler', 'You want to fight', 'Bring it on !', "I'm a Pnj, yes I know that my life has no meaning", 'It smells like Game Over!']
+TEXTS = ['Hello Traveler', 'You want to fight', 'Bring it on !', "I'm a Pnj, yes I know that my life has no meaning", 'It smells like Game Over !']
 
 # Sounds
 EFFECTS_SOUNDS = {'voicef': 'Assets/Sounds/voicef.wav',
