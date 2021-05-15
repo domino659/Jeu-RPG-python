@@ -273,10 +273,11 @@ class Game:
 
 
     def show_start_screen(self):
+        pygame.mixer.music.load(MUSICMENU)
+        pygame.mixer.music.set_volume(VOLMUSICMENU)
+        pygame.mixer_music.play(loops=-1)
         self.main_menu()
-        # pygame.mixer.music.load(MUSICMENU)
-        # pygame.mixer.music.set_volume(VOLMUSICMENU)
-        # pygame.mixer_music.play(loops=-1)
+        
         # self.screen.fill(BLACK)
         # pygame.time.wait(500)
         # self.draw_text("WELCOME TO", FONT, 100, WHITE, WIDTH / 2, HEIGHT * 3 / 8, align="center")
