@@ -173,6 +173,7 @@ class Game:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if self.exit_button_rect.collidepoint(event.pos):
                         self.main_menu()
+                        incredits = False
             pygame.display.flip()
 
 

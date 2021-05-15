@@ -28,9 +28,9 @@ MAPCYBER = 'Map/cyber.tmx'
 FONT = 'Assets/Font/SuperLegendBoy.ttf'
 
 # Music Track
-MUSICGAME = 'Assets/Music/Not Giving Up.ogg'
+MUSICGAME = 'Assets/Music/gamemusic.mp3'
 VOLMUSICGAME = 0.2
-MUSICMENU = 'Assets/Music/Adventure Begin.ogg'
+MUSICMENU = 'Assets/Music/mainmenue.mp3'
 VOLMUSICMENU = 0.2
 
 TILESIZE = 32
