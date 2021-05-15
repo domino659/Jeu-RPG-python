@@ -1,7 +1,7 @@
 from tilemap import *
+from combat import *
 import pygame, random
 from settings import *
-from combat import *
 vec = pygame.math.Vector2
 
 # Création d'un joueur
