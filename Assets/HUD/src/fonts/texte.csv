@@ -1,0 +1,58 @@
+id,en,fr
+MENU_CONTINUE,Continue,Continuer
+MENU_OPTIONS,Options,Options
+MENU_RETRY,Retry,Relancer
+MENU_EXIT,Exit,Quitter
+MENU_TIMER,Timer,Chrono
+MENU_FULLSCREEN,Fullscreen,Plein ecran
+MENU_LOCK,Enable Vsync,Activer la Vsync
+MENU_BACK,Back,Retour
+MENU_LANGUE,Language,Langage
+MENU_NONE,None,Aucun
+MENU_LEVEL,Level,Niveau
+MENU_BOTH,Speedrun,Speedrun
+MENU_QUALITY,High quality,Qualite elevee
+MENU_SPEED,Text speed,Vitesse d'ecriture
+MENU_SLOW,Slow,Lente
+MENU_MED,Medium,Moyenne
+MENU_FAST,Fast,Rapide
+MENU_INSTANT,Instant,Immediat
+MENU_KEY,Controls,Controles
+MENU_MUSIC,Music,Musique
+MENU_SON,SFX,Effet
+MENU_PLAY,Play,Jouer
+MENU_EXITDESK,Exit to desktop,Quitter le jeu
+TITLE_PRESS,Press any button,Appuie sur une touche
+MENU_FILE,File,Fichier
+MENU_SURE,Do you really want to destroy this save?,Veux-tu vraiment supprimer cette sauvegarde?
+MENU_OUI,Sure!,Yep!
+MENU_NON,Nop!,Non!
+MENU_ERASE,Erase this save,Ecraser
+MENU_SAVE,Save,Sauver
+MENU_JUMP,Jump,Sauter
+MENU_TOP,Top,Haut
+MENU_LEFT,Left,Gauche
+MENU_RIGHT,Right,Droite
+MENU_CROUNCH,Crounch,Se baisser
+MENU_DOWN,Down,Bas
+MENU_INT,Interact,Interargir
+MENU_ATK,Dab,Dab
+MENU_ULT,Ultimate,Ultime
+MENU_DASH,Dash,Esquive
+MENU_KEYB,Keyboard/mouse,Clavier/souris
+MENU_JOY,Joystick,Manette
+MENU_OW,Overworld,Monde
+MENU_EXITWORLD,Exit to world,Monde
+MENU_EXITTITLE,Exit to title,Ecran titre
+NEW_GAME,New game,Nouvelle partie
+MENU_PROGRESS,Progress,Avancement
+MENU_ALLTIME,Game time,Temps de jeu
+MENU_CREDIT,Credit,Credit
+MENU_REWARD,Rewards,Recompenses
+MENU_NEWR,New record,Nouveau record
+MENU_CURSOR,Cursor,Curseur
+MENU_TOUCHES,Buttons,Boutons
+MENU_LVLMOV,Way to move in a level,Moyen de deplacement dans un level
+MENU_TRANS,Transparency,Transparence
+MENU_CONFIRMATION_RESET,Reset the keys?,Reinitialiser les touches?
+MENU_RESET,Reset,Reinitialiser 

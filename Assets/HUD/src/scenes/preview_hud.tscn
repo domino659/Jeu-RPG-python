@@ -1,0 +1,207 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/godot_theme/gui.theme" type="Theme" id=1]
+[ext_resource path="res://scenes/preview_hud.gd" type="Script" id=2]
+
+[node name="preview_hud" type="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Tabs" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 13.0
+margin_top = 19.0
+margin_right = -2.0
+margin_bottom = -3.0
+
+[node name="file_dialog" type="FileDialog" parent="Buttons"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -97.0
+margin_bottom = -62.0
+rect_min_size = Vector2( 400, 200 )
+
+[node name="h_box_container" type="HBoxContainer" parent="Buttons"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="v_box_container" type="VBoxContainer" parent="Buttons/h_box_container"]
+margin_right = 246.0
+margin_bottom = 250.0
+size_flags_horizontal = 3
+custom_constants/separation = 32
+
+[node name="button" type="Button" parent="Buttons/h_box_container/v_box_container"]
+margin_right = 246.0
+margin_bottom = 23.0
+text = "Button"
+
+[node name="menu_button" type="MenuButton" parent="Buttons/h_box_container/v_box_container"]
+margin_top = 55.0
+margin_right = 246.0
+margin_bottom = 78.0
+text = "Menu button"
+items = [ "Section", null, 0, false, false, 0, 0, null, "", true, "Item", null, 0, false, false, 1, 0, null, "", false, "Item unchecked", null, 2, false, false, 2, 0, null, "", false, "Item checked", null, 2, true, false, 3, 0, null, "", false, "Section2", null, 0, false, false, 4, 0, null, "", false, "Item checkbox", null, 1, false, false, 5, 0, null, "", false ]
+
+[node name="checkbox" type="CheckBox" parent="Buttons/h_box_container/v_box_container"]
+margin_top = 110.0
+margin_right = 246.0
+margin_bottom = 126.0
+text = "Checkbox"
+
+[node name="color_picker_button" type="ColorPickerButton" parent="Buttons/h_box_container/v_box_container"]
+visible = false
+margin_top = 167.0
+margin_right = 246.0
+margin_bottom = 190.0
+
+[node name="option_button" type="OptionButton" parent="Buttons/h_box_container/v_box_container"]
+margin_top = 158.0
+margin_right = 246.0
+margin_bottom = 184.0
+text = "Item 1"
+items = [ "Item 1", null, false, 0, null, "Item 2", null, false, 1, null, "Item 3", null, true, 2, null ]
+selected = 0
+
+[node name="v_box_container2" type="VBoxContainer" parent="Buttons/h_box_container"]
+margin_left = 250.0
+margin_right = 497.0
+margin_bottom = 250.0
+size_flags_horizontal = 3
+custom_constants/separation = 32
+
+[node name="button" type="Button" parent="Buttons/h_box_container/v_box_container2"]
+margin_right = 247.0
+margin_bottom = 23.0
+text = "Open file dialog"
+
+[node name="tool_button" type="ToolButton" parent="Buttons/h_box_container/v_box_container2"]
+margin_top = 55.0
+margin_right = 247.0
+margin_bottom = 78.0
+text = "Tool button"
+
+[node name="check_button" type="CheckButton" parent="Buttons/h_box_container/v_box_container2"]
+margin_top = 110.0
+margin_right = 247.0
+margin_bottom = 142.0
+text = "Check button"
+
+[node name="Inputs" type="Tabs" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 13.0
+margin_top = 19.0
+margin_right = -2.0
+margin_bottom = -3.0
+
+[node name="h_box_container" type="HBoxContainer" parent="Inputs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="v_box_container" type="VBoxContainer" parent="Inputs/h_box_container"]
+margin_right = 246.0
+margin_bottom = 250.0
+size_flags_horizontal = 3
+custom_constants/separation = 32
+
+[node name="spin_box" type="SpinBox" parent="Inputs/h_box_container/v_box_container"]
+margin_right = 246.0
+margin_bottom = 20.0
+prefix = "SpinBox"
+
+[node name="line_edit" type="LineEdit" parent="Inputs/h_box_container/v_box_container"]
+margin_top = 52.0
+margin_right = 246.0
+margin_bottom = 72.0
+text = "Line Edit"
+
+[node name="text_edit" type="TextEdit" parent="Inputs/h_box_container/v_box_container"]
+margin_top = 104.0
+margin_right = 246.0
+margin_bottom = 154.0
+rect_min_size = Vector2( 0, 50 )
+text = "Text Edit
+
+
+
+
+
+
+
+
+
+
+
+With scrollbar"
+
+[node name="v_box_container2" type="VBoxContainer" parent="Inputs/h_box_container"]
+margin_left = 250.0
+margin_right = 497.0
+margin_bottom = 250.0
+size_flags_horizontal = 3
+custom_constants/separation = 32
+
+[node name="progress_bar" type="ProgressBar" parent="Inputs/h_box_container/v_box_container2"]
+margin_right = 247.0
+margin_bottom = 13.0
+value = 65.0
+
+[node name="h_slider" type="HSlider" parent="Inputs/h_box_container/v_box_container2"]
+margin_top = 45.0
+margin_right = 247.0
+margin_bottom = 61.0
+value = 65.0
+
+[node name="Graph" type="Tabs" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 13.0
+margin_top = 19.0
+margin_right = -2.0
+margin_bottom = -3.0
+
+[node name="graph_edit" type="GraphEdit" parent="Graph"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -10.0
+rect_min_size = Vector2( 200, 200 )
+scroll_offset = Vector2( -13, -16 )
+
+[node name="graph_node" type="GraphNode" parent="Graph/graph_edit"]
+margin_left = 113.0
+margin_top = 116.0
+margin_right = 264.0
+margin_bottom = 232.0
+mouse_filter = 1
+title = "Test graph node"
+offset = Vector2( 100, 100 )
+show_close = true
+resizable = true
+
+[node name="Disabled tab" type="Tabs" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 13.0
+margin_top = 19.0
+margin_right = -2.0
+margin_bottom = -3.0
+[connection signal="pressed" from="Buttons/h_box_container/v_box_container2/button" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="Inputs/h_box_container/v_box_container2/h_slider" to="." method="_on_h_slider_value_changed"]

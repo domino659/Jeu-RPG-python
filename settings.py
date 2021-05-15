@@ -24,6 +24,7 @@ QUIT_PRINT = 'P'
 FPS = 60
 TITLE = "Jeux Type RPG"
 MAP = 'Map/map.tmx'
+MAPCYBER = 'Map/cyber.tmx'
 MAP_back = 'Map/map_back.tmx'
 FONT = 'Assets/Font/SuperLegendBoy.ttf'
 

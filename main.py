@@ -62,7 +62,7 @@ class Game:
             s.set_volume(0.2)
             self.pnj_walk_sound.append(s)
 
-        self.map = TiledMap(MAP)
+        self.map = TiledMap(MAPCYBER)
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()    
     

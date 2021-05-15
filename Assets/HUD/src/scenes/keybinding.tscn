@@ -1,0 +1,635 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://scenes/keybinding.gd" type="Script" id=1]
+[ext_resource path="res://assets/panel/options.png" type="Texture" id=2]
+[ext_resource path="res://fonts/font_big.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/button_normal/normal_on.png" type="Texture" id=5]
+[ext_resource path="res://assets/button_normal/normal_disabled.png" type="Texture" id=6]
+[ext_resource path="res://assets/button_skewed/button_back_disabled.png" type="Texture" id=7]
+[ext_resource path="res://assets/button_skewed/button_back_pressed.png" type="Texture" id=8]
+[ext_resource path="res://assets/button_skewed/button_back_focused.png" type="Texture" id=9]
+[ext_resource path="res://assets/button_skewed/button_back_normal.png" type="Texture" id=10]
+[ext_resource path="res://assets/button_skewed/button_back_hover.png" type="Texture" id=11]
+[ext_resource path="res://assets/godot_theme/gui.theme" type="Theme" id=12]
+[ext_resource path="res://assets/button_normal/normal_off.png" type="Texture" id=13]
+[ext_resource path="res://assets/button_normal/normal_hover.png" type="Texture" id=14]
+[ext_resource path="res://assets/button_normal/normal_focus.png" type="Texture" id=15]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 15 )
+region_rect = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="Animation" id=6]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("touche_monde:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 256, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("touche_monde:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 256, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("reglage:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 448, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "showparent"
+}, {
+"args": [  ],
+"method": "destroy"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "keybindingfalse"
+} ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("reglage:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 448, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hideparent"
+} ]
+}
+
+[node name="keybinding" type="CanvasLayer"]
+pause_mode = 2
+layer = 12
+script = ExtResource( 1 )
+
+[node name="reglage" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="base_sprite" type="TextureRect" parent="reglage"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -472.0
+margin_top = -240.0
+texture = ExtResource( 2 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_back" type="TextureButton" parent="reglage"]
+margin_left = 72.0
+margin_top = 47.0
+margin_right = 273.0
+margin_bottom = 97.0
+focus_neighbour_bottom = NodePath("../Button_input")
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 11 )
+texture_disabled = ExtResource( 7 )
+texture_focused = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="reglage/Button_back"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 3 )
+text = "MENU_BACK"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_reset" type="TextureButton" parent="reglage"]
+margin_left = 62.0
+margin_top = 230.0
+margin_right = 263.0
+margin_bottom = 280.0
+focus_neighbour_bottom = NodePath("../Button_input")
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 11 )
+texture_disabled = ExtResource( 7 )
+texture_focused = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="reglage/Button_reset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 3 )
+text = "MENU_RESET"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="keyboard" type="Label" parent="reglage"]
+margin_left = 336.0
+margin_top = 48.0
+margin_right = 432.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "MENU_KEYB"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="joy" type="Label" parent="reglage"]
+margin_left = 432.0
+margin_top = 48.0
+margin_right = 496.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "MENU_JOY"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="touche_monde" type="Control" parent="reglage"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="topow" type="Label" parent="reglage/touche_monde"]
+margin_left = 256.0
+margin_top = 64.0
+margin_right = 336.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "MENU_TOP"
+align = 2
+valign = 1
+autowrap = true
+
+[node name="leftow" type="Label" parent="reglage/touche_monde"]
+margin_left = 256.0
+margin_top = 96.0
+margin_right = 336.0
+margin_bottom = 128.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "MENU_LEFT"
+align = 2
+valign = 1
+autowrap = true
+
+[node name="downow" type="Label" parent="reglage/touche_monde"]
+margin_left = 256.0
+margin_top = 128.0
+margin_right = 336.0
+margin_bottom = 160.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "MENU_DOWN"
+align = 2
+valign = 1
+autowrap = true
+
+[node name="rightow" type="Label" parent="reglage/touche_monde"]
+margin_left = 256.0
+margin_top = 160.0
+margin_right = 336.0
+margin_bottom = 192.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "MENU_RIGHT"
+align = 2
+valign = 1
+autowrap = true
+
+[node name="interactiontxt" type="Label" parent="reglage/touche_monde"]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 336.0
+margin_bottom = 224.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "MENU_INT"
+align = 2
+valign = 1
+autowrap = true
+
+[node name="move_up_ow" type="Control" parent="reglage/touche_monde"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Button2" type="Button" parent="reglage/touche_monde/move_up_ow" groups=[
+"keybinding",
+]]
+margin_left = 432.0
+margin_top = 64.0
+margin_right = 496.0
+margin_bottom = 96.0
+focus_neighbour_left = NodePath("../Button")
+focus_neighbour_top = NodePath("../../dash/Button2")
+focus_neighbour_right = NodePath("../../move_left/Button")
+focus_neighbour_bottom = NodePath("../../move_left/Button2")
+focus_next = NodePath("../../move_left/Button")
+focus_previous = NodePath("../Button")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_pressed = Color( 0.254902, 0.952941, 0.988235, 1 )
+toggle_mode = true
+text = "test"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="texture" type="TextureRect" parent="reglage/touche_monde/move_up_ow/Button2"]
+margin_right = 64.0
+margin_bottom = 32.0
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="reglage/touche_monde/move_up_ow" groups=[
+"keybinding",
+]]
+margin_left = 352.0
+margin_top = 64.0
+margin_right = 416.0
+margin_bottom = 96.0
+focus_neighbour_left = NodePath("../../Button_back")
+focus_neighbour_top = NodePath("../../dash/Button")
+focus_neighbour_right = NodePath("../Button2")
+focus_neighbour_bottom = NodePath("../../move_left/Button")
+focus_next = NodePath("../Button2")
+focus_previous = NodePath("../../Button_back")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_pressed = Color( 0.254902, 0.952941, 0.988235, 1 )
+toggle_mode = true
+text = "test"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="texture" type="TextureRect" parent="reglage/touche_monde/move_up_ow/Button"]
+margin_right = 64.0
+margin_bottom = 32.0
+stretch_mode = 4
+
+[node name="move_left_ow" type="Control" parent="reglage/touche_monde"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Button2" type="Button" parent="reglage/touche_monde/move_left_ow" groups=[
+"keybinding",
+]]
+margin_left = 432.0
+margin_top = 96.0
+margin_right = 496.0
+margin_bottom = 128.0
+focus_neighbour_left = NodePath("../Button")
+focus_neighbour_top = NodePath("../../dash/Button2")
+focus_neighbour_right = NodePath("../../move_left/Button")
+focus_neighbour_bottom = NodePath("../../move_left/Button2")
+focus_next = NodePath("../../move_left/Button")
+focus_previous = NodePath("../Button")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_pressed = Color( 0.254902, 0.952941, 0.988235, 1 )
+toggle_mode = true
+text = "test"
+
+[node name="texture" type="TextureRect" parent="reglage/touche_monde/move_left_ow/Button2"]
+margin_right = 64.0
+margin_bottom = 32.0
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="reglage/touche_monde/move_left_ow" groups=[
+"keybinding",
+]]
+margin_left = 352.0
+margin_top = 96.0
+margin_right = 416.0
+margin_bottom = 128.0
+focus_neighbour_left = NodePath("../../Button_back")
+focus_neighbour_top = NodePath("../../dash/Button")
+focus_neighbour_right = NodePath("../Button2")
+focus_neighbour_bottom = NodePath("../../move_left/Button")
+focus_next = NodePath("../Button2")
+focus_previous = NodePath("../../Button_back")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_pressed = Color( 0.254902, 0.952941, 0.988235, 1 )
+toggle_mode = true
+text = "test"
+
+[node name="texture" type="TextureRect" parent="reglage/touche_monde/move_left_ow/Button"]
+margin_right = 64.0
+margin_bottom = 32.0
+stretch_mode = 4
+
+[node name="move_down_ow" type="Control" parent="reglage/touche_monde"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Button2" type="Button" parent="reglage/touche_monde/move_down_ow" groups=[
+"keybinding",
+]]
+margin_left = 432.0
+margin_top = 128.0
+margin_right = 496.0
+margin_bottom = 160.0
+focus_neighbour_left = NodePath("../Button")
+focus_neighbour_top = NodePath("../../dash/Button2")
+focus_neighbour_right = NodePath("../../move_left/Button")
+focus_neighbour_bottom = NodePath("../../move_left/Button2")
+focus_next = NodePath("../../move_left/Button")
+focus_previous = NodePath("../Button")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_pressed = Color( 0.254902, 0.952941, 0.988235, 1 )
+toggle_mode = true
+text = "test"
+
+[node name="texture" type="TextureRect" parent="reglage/touche_monde/move_down_ow/Button2"]
+margin_right = 64.0
+margin_bottom = 32.0
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="reglage/touche_monde/move_down_ow" groups=[
+"keybinding",
+]]
+margin_left = 352.0
+margin_top = 128.0
+margin_right = 416.0
+margin_bottom = 160.0
+focus_neighbour_left = NodePath("../../Button_back")
+focus_neighbour_top = NodePath("../../dash/Button")
+focus_neighbour_right = NodePath("../Button2")
+focus_neighbour_bottom = NodePath("../../move_left/Button")
+focus_next = NodePath("../Button2")
+focus_previous = NodePath("../../Button_back")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_pressed = Color( 0.254902, 0.952941, 0.988235, 1 )
+toggle_mode = true
+text = "test"
+
+[node name="texture" type="TextureRect" parent="reglage/touche_monde/move_down_ow/Button"]
+margin_right = 64.0
+margin_bottom = 32.0
+stretch_mode = 4
+
+[node name="move_right_ow" type="Control" parent="reglage/touche_monde"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Button2" type="Button" parent="reglage/touche_monde/move_right_ow" groups=[
+"keybinding",
+]]
+margin_left = 432.0
+margin_top = 160.0
+margin_right = 496.0
+margin_bottom = 192.0
+focus_neighbour_left = NodePath("../Button")
+focus_neighbour_top = NodePath("../../dash/Button2")
+focus_neighbour_right = NodePath("../../move_left/Button")
+focus_neighbour_bottom = NodePath("../../move_left/Button2")
+focus_next = NodePath("../../move_left/Button")
+focus_previous = NodePath("../Button")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_pressed = Color( 0.254902, 0.952941, 0.988235, 1 )
+toggle_mode = true
+text = "test"
+
+[node name="texture" type="TextureRect" parent="reglage/touche_monde/move_right_ow/Button2"]
+margin_right = 64.0
+margin_bottom = 32.0
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="reglage/touche_monde/move_right_ow" groups=[
+"keybinding",
+]]
+margin_left = 352.0
+margin_top = 160.0
+margin_right = 416.0
+margin_bottom = 192.0
+focus_neighbour_left = NodePath("../../Button_back")
+focus_neighbour_top = NodePath("../../dash/Button")
+focus_neighbour_right = NodePath("../Button2")
+focus_neighbour_bottom = NodePath("../../move_left/Button")
+focus_next = NodePath("../Button2")
+focus_previous = NodePath("../../Button_back")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_pressed = Color( 0.254902, 0.952941, 0.988235, 1 )
+toggle_mode = true
+text = "test"
+
+[node name="texture" type="TextureRect" parent="reglage/touche_monde/move_right_ow/Button"]
+margin_right = 64.0
+margin_bottom = 32.0
+stretch_mode = 4
+
+[node name="interaction" type="Control" parent="reglage/touche_monde"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Button2" type="Button" parent="reglage/touche_monde/interaction" groups=[
+"keybinding",
+]]
+margin_left = 432.0
+margin_top = 192.0
+margin_right = 496.0
+margin_bottom = 224.0
+focus_neighbour_left = NodePath("../Button")
+focus_neighbour_top = NodePath("../../dash/Button2")
+focus_neighbour_right = NodePath("../../move_left/Button")
+focus_neighbour_bottom = NodePath("../../move_left/Button2")
+focus_next = NodePath("../../move_left/Button")
+focus_previous = NodePath("../Button")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_pressed = Color( 0.254902, 0.952941, 0.988235, 1 )
+toggle_mode = true
+text = "test"
+
+[node name="texture" type="TextureRect" parent="reglage/touche_monde/interaction/Button2"]
+margin_right = 64.0
+margin_bottom = 32.0
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="reglage/touche_monde/interaction" groups=[
+"keybinding",
+]]
+margin_left = 352.0
+margin_top = 192.0
+margin_right = 416.0
+margin_bottom = 224.0
+focus_neighbour_left = NodePath("../../Button_back")
+focus_neighbour_top = NodePath("../../dash/Button")
+focus_neighbour_right = NodePath("../Button2")
+focus_neighbour_bottom = NodePath("../../move_left/Button")
+focus_next = NodePath("../Button2")
+focus_previous = NodePath("../../Button_back")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_pressed = Color( 0.254902, 0.952941, 0.988235, 1 )
+toggle_mode = true
+text = "test"
+
+[node name="texture" type="TextureRect" parent="reglage/touche_monde/interaction/Button"]
+margin_right = 64.0
+margin_bottom = 32.0
+stretch_mode = 4
+
+[node name="animtouche" type="AnimationPlayer" parent="reglage"]
+playback_speed = 2.0
+anims/level = SubResource( 6 )
+anims/world = SubResource( 7 )
+
+[node name="accept_dialog" type="ConfirmationDialog" parent="reglage"]
+margin_right = 74.0
+margin_bottom = 57.0
+dialog_text = "MENU_CONFIRMATION_RESET"
+
+[node name="anim" type="AnimationPlayer" parent="."]
+autoplay = "open"
+anims/close = SubResource( 8 )
+anims/open = SubResource( 9 )
+[connection signal="pressed" from="reglage/Button_back" to="." method="_on_Button_back_pressed"]
+[connection signal="pressed" from="reglage/Button_reset" to="." method="_on_Button_reset_pressed"]
+[connection signal="confirmed" from="reglage/accept_dialog" to="." method="_on_accept_dialog_confirmed"]
