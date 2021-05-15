@@ -188,7 +188,7 @@
   <object id="22" name="wall" x="1088" y="2144" width="192" height="32"/>
   <object id="23" name="wall" x="1792" y="2112" width="128" height="64"/>
   <object id="24" name="wall" x="960" y="2272" width="1112" height="32"/>
-  <object id="25" name="pnj" x="1240" y="2184" width="32" height="32"/>
+  <object id="25" name="pnj" x="1240" y="2176" width="32" height="32"/>
   <object id="26" name="wall" x="2080" y="1696" width="32" height="608"/>
   <object id="27" name="wall" x="928" y="1696" width="32" height="608"/>
   <object id="28" name="pnj" x="1944" y="2176" width="32" height="32"/>
@@ -205,7 +205,7 @@
   <object id="40" name="wall" x="1576" y="1864" width="16" height="16"/>
   <object id="41" name="wall" x="2056" y="1736" width="16" height="16"/>
   <object id="43" name="wall" x="1952" y="2184" width="16" height="16"/>
-  <object id="44" name="wall" x="1248" y="2192" width="16" height="16"/>
+  <object id="44" name="wall" x="1248" y="2184" width="16" height="16"/>
   <object id="45" name="wall" x="1480" y="1352" width="16" height="16"/>
   <object id="46" name="pnj" x="1888" y="1888" width="32" height="32"/>
   <object id="47" name="wall" x="1896" y="1896" width="16" height="16"/>

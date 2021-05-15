@@ -65,10 +65,6 @@ class Game:
         self.map = TiledMap(MAPCYBER)
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()    
-    
-        # self.map_back = TiledMap(MAP_back)
-        # self.map_img_back = self.map_back.make_map()
-        # self.map_rect_back = self.map_img_back.get_rect()   
 
     # Initialize all variable and setup for new game
     def new(self):
@@ -122,8 +118,6 @@ class Game:
         # DEBUG Dessine Grid
         # self.draw_grid()
 
-        #Map Front
-        # self.screen.blit(self.map_img_back, self.camera.apply_rect(self.map_rect_back))
         # Map
         self.screen.blit(self.map_img, self.camera.apply_rect(self.map_rect))
 

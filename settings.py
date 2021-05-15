@@ -25,12 +25,11 @@ FPS = 60
 TITLE = "Jeux Type RPG"
 MAP = 'Map/map.tmx'
 MAPCYBER = 'Map/cyber.tmx'
-MAP_back = 'Map/map_back.tmx'
 FONT = 'Assets/Font/SuperLegendBoy.ttf'
 
 # Music Track
 MUSICGAME = 'Assets/Music/Not Giving Up.ogg'
-VOLMUSICGAME = 0
+VOLMUSICGAME = 0.2
 MUSICMENU = 'Assets/Music/Adventure Begin.ogg'
 VOLMUSICMENU = 0.2
 
@@ -39,17 +38,16 @@ GRIDWIDTH = WIDTH / TILESIZE
 GRIDHEIGHT = HEIGHT / TILESIZE
 
 # Player Setting
-PLAYER_SPEED = 300
+PLAYER_SPEED = 200
 ANIMATIONSPEED = 150
 PLAYER_IMG = 'Assets/Actor/hero/front2.png'
 
 # PNJ
 PNJ_IMG_GIRL = ['Assets/Actor/pnj/pnjgirl0.png', 'Assets/Actor/pnj/pnjgirl1.png', 'Assets/Actor/pnj/pnjgirl2.png', 'Assets/Actor/pnj/pnjgirl3.png', 'Assets/Actor/pnj/pnjgirl4.png']
-PNJ_IMG_MALE = ['Assets/Actor/pnj/pnjmale0.png', 'Assets/Actor/pnj/pnjmale1.png', 'Assets/Actor/pnj/pnjmale2.png', 'Assets/Actor/pnj/pnjmale3.png', 'Assets/Actor/pnj/pnjmale4.png']
-PNJ_BRONTIS = 'Assets/Actor/pnj/feebrontis.png'
+PNJ_IMG_MALE = ['Assets/Actor/pnj/pnjmale0.png', 'Assets/Actor/pnj/pnjmale1.png', 'Assets/Actor/pnj/pnjmale2.png', 'Assets/Actor/pnj/pnjmale3.png', 'Assets/Actor/pnj/pnjmale4.png']    
 
 # Text
-TEXTS = ['Hello Traveler', 'You want to fight', 'Bring it on !', "I'm a Pnj, yes I know that my life has no meaning"]
+TEXTS = ['Hello Traveler', 'You want to fight', 'Bring it on !', "I'm a Pnj, yes I know that my life has no meaning", 'It smells like Game Over!']
 
 # Sounds
 EFFECTS_SOUNDS = {'voicef': 'Assets/Sounds/voicef.wav',
