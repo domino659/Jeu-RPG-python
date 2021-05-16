@@ -19,18 +19,22 @@ color_black = (0,0,0)
 width = screen.get_width() 
 height = screen.get_height() 
 
-fond_combat = pygame.image.load('Assets/Backgrounds/fond_combat.jpg')
+fond_combat = pygame.image.load('Assets/Backgrounds/combat/fond_combat.jpg')
 img_perso = pygame.image.load("Assets/Actor/Combat/persofou.png")
 img_perso2 = pygame.image.load("Assets/Actor/Combat/persofou2.png")
-contour = pygame.image.load("Assets/Backgrounds/contour.png")
-contour_sprite = pygame.transform.scale(contour, (472, 835))
+contour = pygame.image.load("Assets/Backgrounds/combat/contour.png")
+contour_s = pygame.image.load("Assets/Backgrounds/combat/contour_s.png")
+contour_nom = pygame.transform.scale(contour_s, (472, 60))
+contour_fp = pygame.transform.scale(contour_s, (240, 60))
+contour_phrase = pygame.transform.scale(contour_s, (829, 60))
+contour_sprite = pygame.transform.scale(contour, (472, 720))
 contour_tableau = pygame.transform.scale(contour,(480, 720))
-perso1 = pygame.transform.scale(img_perso, (402, 745))
-perso2 = pygame.transform.scale(img_perso2, (402, 745))
+perso1 = pygame.transform.scale(img_perso, (360, 660))
+perso2 = pygame.transform.scale(img_perso2, (360, 660))
 screen.blit(fond_combat , (0, 0))
 
 smallfont = pygame.font.SysFont('Corbel',35)
-font_phrase = pygame.font.SysFont('Corbel',30)
+font_phrase = pygame.font.SysFont('Corbel',25)
 
 def Texte(texte) :
     text = smallfont.render(texte , True , color) 
@@ -124,16 +128,16 @@ def check_phrase(phrase, mot): #Vérifie si le mot choisit est logique par rappo
 def creer_tableau(): #Crée et retourne le tableau des mots utilisables en combat en évitant de mettre deux fois les memes mots
 
     tableau_mots = []
-    while len(tableau_mots) < 10 :
+    while len(tableau_mots) < 12 :
         if len(tableau_mots) <= 3 :
             mot = choice(list(dictionnaire.items()))
             if mot[1] == "sujet" :
                 tableau_mots.append(mot[0])
-        elif 3 < len(tableau_mots) <= 7 :
+        elif 3 < len(tableau_mots) <= 9 :
             mot = choice(list(dictionnaire.items()))
             if mot[1] == "verbe" :
                 tableau_mots.append(mot[0])
-        elif len(tableau_mots) > 7 :
+        elif len(tableau_mots) > 9 :
             mot = choice(list(dictionnaire.items()))
             if mot[1] == "liaison" :
                 tableau_mots.append(mot[0])
@@ -144,7 +148,7 @@ def afficher_tableau(tableau_mots):
     screen.blit(contour_tableau, (720,180))
 
     for i in range(len(tableau_mots)) :
-        screen.blit(Texte(tableau_mots[i]) , (770, 200+72*i)) 
+        screen.blit(Texte(tableau_mots[i]) , (770, 210+56*i)) 
 
     pygame.display.update()
 
@@ -183,7 +187,7 @@ def afficher_phrase(joueur, nombre) : #Affiche les phrases des deux joueurs
         except:
             print("Pas encore de phrase")
         phrase = "".join(phrase)
-        screen.blit(font_phrase.render(phrase , True , color) , (100, 950))
+        screen.blit(font_phrase.render(phrase , True , color) , (106, 85))
     else : 
         for i in range(len(joueur.phrase)) :
             phrase += str(joueur.phrase[i] + " ")
@@ -194,42 +198,31 @@ def afficher_phrase(joueur, nombre) : #Affiche les phrases des deux joueurs
             print("Pas encore de phrase")
         phrase = "".join(phrase)
 
-        screen.blit(font_phrase.render(phrase , True , color) , (1400, 950))
+        screen.blit(font_phrase.render(phrase , True , color) , (1040, 85))
 
 def redraw(joueur1, joueur2):
 
     screen.blit(fond_combat , (0, 0))
-    #pygame.draw.rect(screen,color_grey,[81,64,240,60]) #Nom 1
-    s = pygame.Surface((472,60))
-    s.fill(color_black)
-    s.set_alpha(200)
-    screen.blit(s, (81,64))
-    # pygame.draw.rect(screen,color_black,[81,180,472,835]) #Sprite 1
-    screen.blit(contour_sprite, (81,180))
-    #pygame.draw.rect(screen,color_grey,[1599,64,240,60]) #Nom 2
-    s = pygame.Surface((472,60))
-    s.fill(color_black)
-    s.set_alpha(200)
-    screen.blit(s, (1367,64))
-    # pygame.draw.rect(screen,color_black,[1367,180,472,835]) #Sprite 2 
-    screen.blit(contour_sprite, (1367,180))
-    #pygame.draw.rect(screen,color_grey,[840,955,240,60]) #Bouton finir phrase
-    s = pygame.Surface((240,60))
-    s.fill(color_black)
-    s.set_alpha(200)
-    screen.blit(s, (840,955))
+    screen.blit(contour_phrase, (81,64)) #phrase j1
+    screen.blit(contour_sprite, (81,180)) #sprite 1
+    screen.blit(contour_phrase, (1010,64)) #phrase j2
+    screen.blit(contour_sprite, (1367,180)) #sprite 2
+    screen.blit(contour_fp, (815,940))
+    screen.blit(contour_nom, (81, 940)) #nom 1
+    screen.blit(contour_nom, (1367, 940)) #nom 2
 
     pv = str(joueur1.pv)
-    screen.blit(Texte(joueur1.nom+" > "+pv+" hp") , (101, 74)) #Nom 1
+    screen.blit(Texte(joueur1.nom+" > "+pv+" hp") , (106, 954)) #Nom 1 
     pv = str(joueur2.pv)
-    screen.blit(Texte(joueur2.nom+" > "+pv+" hp") , (1387, 74)) #Nom 2
-    screen.blit(Texte("Finir phrase"), (840, 955)) #Finir phrase
+    screen.blit(Texte(joueur2.nom+" > "+pv+" hp") , (1400, 954)) #Nom 2
+
+    screen.blit(Texte("Finir phrase"), (850, 955)) #Finir phrase
 
     afficher_phrase(joueur1, 1)
     afficher_phrase(joueur2, 2)
 
-    screen.blit(perso1 , (121, 200))
-    screen.blit(pygame.transform.flip(perso2, True, False), (1407,200))
+    screen.blit(perso1 , (141, 210))
+    screen.blit(pygame.transform.flip(perso2, True, False), (1427,210))
 
 
 def combat(joueur1, joueur2):
