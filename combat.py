@@ -20,17 +20,27 @@ width = screen.get_width()
 height = screen.get_height() 
 
 fond_combat = pygame.image.load('Assets/Backgrounds/combat/fond_combat.jpg')
-img_perso = pygame.image.load("Assets/Actor/Combat/persofou.png")
-img_perso2 = pygame.image.load("Assets/Actor/Combat/persofou2.png")
+
+img_perso1 = pygame.image.load("Assets/Actor/Combat/perso1.png")
+img_perso2 = pygame.image.load("Assets/Actor/Combat/perso2.png")
+img_ennemi1 = pygame.image.load("Assets/Actor/Combat/ennemi1.png")
+img_ennemi2 = pygame.image.load("Assets/Actor/Combat/ennemi2.png")
+img_ennemi3 = pygame.image.load("Assets/Actor/Combat/ennemi3.png")
+perso1 = pygame.transform.scale(img_perso1, (360, 660))
+perso2 = pygame.transform.scale(img_perso2, (360, 660))
+ennemi1 = pygame.transform.scale(img_ennemi1, (360, 660))
+ennemi2 = pygame.transform.scale(img_ennemi2, (360, 660))
+ennemi3 = pygame.transform.scale(img_ennemi3, (250, 660))
+
 contour = pygame.image.load("Assets/Backgrounds/combat/contour.png")
+contour_a = pygame.image.load("Assets/Backgrounds/combat/contour_actif.png")
 contour_s = pygame.image.load("Assets/Backgrounds/combat/contour_s.png")
 contour_nom = pygame.transform.scale(contour_s, (472, 60))
 contour_fp = pygame.transform.scale(contour_s, (240, 60))
 contour_phrase = pygame.transform.scale(contour_s, (829, 60))
 contour_sprite = pygame.transform.scale(contour, (472, 720))
+contour_sprite_a = pygame.transform.scale(contour_a, (472, 720))
 contour_tableau = pygame.transform.scale(contour,(480, 720))
-perso1 = pygame.transform.scale(img_perso, (360, 660))
-perso2 = pygame.transform.scale(img_perso2, (360, 660))
 screen.blit(fond_combat , (0, 0))
 
 smallfont = pygame.font.SysFont('Corbel',35)
@@ -49,7 +59,7 @@ class Joueur:
         self.phrase = []
         self.phrase_finie = False
         self.classe = ''
-        self.etat = ''
+        self.sprite = perso1
 
     def Tour_joueur(self, tableau_mots): #Si le joueur n'a pas fini sa phrase il choisit un mot parmit la liste
 
@@ -69,7 +79,6 @@ class Joueur:
 
                     mouse = pygame.mouse.get_pos()
                     print (self.nom, self.phrase)
-                    print (mouse)
 
                     if 720 <= mouse[0] <= 720+480 and 200 <= mouse[1] <= 200+72*10: 
                         selected_word = floor((mouse[1] - 200) / 72)
@@ -85,6 +94,58 @@ class Joueur:
                     if 840 <= mouse[0] <= 840+240 and 955 <= mouse[1] <= 955+60:
                         self.phrase_finie = True
                         choix_mot = True 
+
+class IA :
+
+    def __init__(self):
+        self.nom = ''
+        self.pv_max = 20
+        self.pv = self.pv_max
+        self.phrase = []
+        self.phrase_finie = False
+        self.classe = ''
+        self.sprite = ennemi1
+
+    def Tour_joueur(self, tableau_mots) :
+
+        if self.phrase_finie == False :
+
+            afficher_tableau(tableau_mots)
+            time.sleep(1.5)
+
+            choix_mot = False
+
+            while choix_mot == False :
+                    if len(self.phrase) == 0 :
+                        mot = choice(list(tableau_mots))
+                        if dictionnaire[mot] == "sujet" :
+                            self.phrase.append(mot)
+                            choix_mot = True
+                    elif len(self.phrase) == 1 :
+                        mot = choice(list(tableau_mots))
+                        if dictionnaire[mot] == "verbe" or dictionnaire[mot] == "liaison" :
+                            self.phrase.append(mot)
+                            choix_mot = True
+                    elif 1 < len(self.phrase) < 5 :
+                        mot = choice(list(tableau_mots))
+                        mot_prec = self.phrase[len(self.phrase)-1]
+                        if dictionnaire[mot_prec] == "sujet" :
+                            if dictionnaire[mot] == "verbe" or dictionnaire[mot] == "liaison" :
+                                self.phrase.append(mot)
+                                choix_mot = True
+                        elif dictionnaire[mot_prec] == "verbe" :
+                            if dictionnaire[mot] == "sujet" :
+                                self.phrase.append(mot)
+                                choix_mot = True        
+                        elif dictionnaire[mot_prec] == "liaison" :
+                            if dictionnaire[mot] == "verbe" or dictionnaire[mot] == "sujet" :
+                                self.phrase.append(mot)
+                                choix_mot = True
+                        else : 
+                            choix_mot = True
+                    else :
+                        self.phrase_finie = True
+                        choix_mot = True
 
 def check_phrase(phrase, mot): #Vérifie si le mot choisit est logique par rapport au mot précédent
     indice = len(phrase)
@@ -200,13 +261,17 @@ def afficher_phrase(joueur, nombre) : #Affiche les phrases des deux joueurs
 
         screen.blit(font_phrase.render(phrase , True , color) , (1040, 85))
 
-def redraw(joueur1, joueur2):
+def redraw(joueur1, joueur2, j):
 
     screen.blit(fond_combat , (0, 0))
     screen.blit(contour_phrase, (81,64)) #phrase j1
-    screen.blit(contour_sprite, (81,180)) #sprite 1
+    screen.blit(contour_sprite, (81,180)) #c sprite 1
+    if j == 1 :
+        screen.blit(contour_sprite_a, (81,180))
     screen.blit(contour_phrase, (1010,64)) #phrase j2
-    screen.blit(contour_sprite, (1367,180)) #sprite 2
+    screen.blit(contour_sprite, (1367,180)) #c sprite 2
+    if j == 2 :
+        screen.blit(contour_sprite_a, (1367,180))
     screen.blit(contour_fp, (815,940))
     screen.blit(contour_nom, (81, 940)) #nom 1
     screen.blit(contour_nom, (1367, 940)) #nom 2
@@ -221,8 +286,9 @@ def redraw(joueur1, joueur2):
     afficher_phrase(joueur1, 1)
     afficher_phrase(joueur2, 2)
 
-    screen.blit(perso1 , (141, 210))
-    screen.blit(pygame.transform.flip(perso2, True, False), (1427,210))
+    screen.blit(joueur1.sprite , (141, 210))
+    print(joueur2.sprite)
+    screen.blit(pygame.transform.flip(joueur2.sprite, True, False), (1427,210))
 
 
 def combat(joueur1, joueur2):
@@ -232,9 +298,9 @@ def combat(joueur1, joueur2):
     while joueur1.pv > 0 and joueur2.pv >0 :
         while (len(tableau_mots) > 0 and (joueur1.phrase_finie == False or joueur2.phrase_finie == False)):       
             joueur1.Tour_joueur(tableau_mots)
-            redraw(joueur1, joueur2)
+            redraw(joueur1, joueur2, 2)
             joueur2.Tour_joueur(tableau_mots)
-            redraw(joueur1, joueur2)
+            redraw(joueur1, joueur2, 1)
 
         calcul_degats(joueur1,joueur2)
         calcul_degats(joueur2,joueur1)
@@ -244,4 +310,4 @@ def combat(joueur1, joueur2):
         joueur1.phrase_finie = False
         joueur2.phrase = []
         joueur2.phrase_finie = False
-        redraw(joueur1, joueur2)
+        redraw(joueur1, joueur2, 1)
