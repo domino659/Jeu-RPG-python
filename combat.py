@@ -80,9 +80,9 @@ class Joueur:
                     mouse = pygame.mouse.get_pos()
                     print (self.nom, self.phrase)
 
-                    if 720 <= mouse[0] <= 720+480 and 200 <= mouse[1] <= 200+72*10: 
-                        selected_word = floor((mouse[1] - 200) / 72)
-                        print(selected_word)
+                    if 720 <= mouse[0] <= 720+480 and 200 <= mouse[1] <= 200+56*12: 
+                        selected_word = floor((mouse[1] - 200) / 56)
+                        print(tableau_mots[selected_word])
                         try:
                             if check_phrase(self.phrase, tableau_mots[selected_word]):
                                 self.phrase.append(tableau_mots[selected_word])
@@ -123,14 +123,14 @@ class IA :
                             choix_mot = True
                     elif len(self.phrase) == 1 :
                         mot = choice(list(tableau_mots))
-                        if dictionnaire[mot] == "verbe" or dictionnaire[mot] == "liaison" :
+                        if dictionnaire[mot] == "verbe" or dictionnaire[mot] == "liaison" or dictionnaire[mot] == "verbe_fin" :
                             self.phrase.append(mot)
                             choix_mot = True
                     elif 1 < len(self.phrase) < 5 :
                         mot = choice(list(tableau_mots))
                         mot_prec = self.phrase[len(self.phrase)-1]
                         if dictionnaire[mot_prec] == "sujet" :
-                            if dictionnaire[mot] == "verbe" or dictionnaire[mot] == "liaison" :
+                            if dictionnaire[mot] == "verbe" or dictionnaire[mot] == "liaison" or dictionnaire[mot] == "verbe_fin" :
                                 self.phrase.append(mot)
                                 choix_mot = True
                         elif dictionnaire[mot_prec] == "verbe" :
@@ -138,9 +138,13 @@ class IA :
                                 self.phrase.append(mot)
                                 choix_mot = True        
                         elif dictionnaire[mot_prec] == "liaison" :
-                            if dictionnaire[mot] == "verbe" or dictionnaire[mot] == "sujet" :
+                            if dictionnaire[mot] == "verbe" or dictionnaire[mot] == "sujet" or dictionnaire[mot] == "verbe_fin":
                                 self.phrase.append(mot)
                                 choix_mot = True
+                        elif dictionnaire[mot_prec] == "verbe_fin" :
+                            if dictionnaire[mot] == "liaison" or dictionnaire[mot] == "sujet" :
+                                self.phrase.append(mot)
+                                choix_mot = True                                
                         else : 
                             choix_mot = True
                     else :
@@ -159,6 +163,8 @@ def check_phrase(phrase, mot): #Vérifie si le mot choisit est logique par rappo
                 return True
             elif dictionnaire[phrase[indice-1]] == "liaison" :
                 return True
+            elif dictionnaire[phrase[indice-1]] == "verbe_fin" :
+                return False
             else : print("le mot ne possede pas de type")
 
     if dictionnaire[mot] == "verbe" :
@@ -168,6 +174,8 @@ def check_phrase(phrase, mot): #Vérifie si le mot choisit est logique par rappo
             if dictionnaire[phrase[indice-1]] == "sujet" :
                 return True
             elif dictionnaire[phrase[indice-1]] == "verbe" :
+                return False
+            elif dictionnaire[phrase[indice-1]] == "verbe_fin" :
                 return False
             elif dictionnaire[phrase[indice-1]] == "liaison" :
                 return True
@@ -181,10 +189,25 @@ def check_phrase(phrase, mot): #Vérifie si le mot choisit est logique par rappo
                 return True
             elif dictionnaire[phrase[indice-1]] == "verbe" :
                 return True
+            elif dictionnaire[phrase[indice-1]] == "verbe_fin" :
+                return True
             elif dictionnaire[phrase[indice-1]] == "liaison" :
                 return False
             else : print("le mot ne possede pas de type")
 
+    if dictionnaire[mot] == "verbe_fin" :
+        if indice == 0 :
+            return False
+        else :
+            if dictionnaire[phrase[indice-1]] == "sujet" :
+                return True
+            elif dictionnaire[phrase[indice-1]] == "verbe" :
+                return False
+            elif dictionnaire[phrase[indice-1]] == "verbe_fin" :
+                return False
+            elif dictionnaire[phrase[indice-1]] == "liaison" :
+                return True
+            else : print("le mot ne possede pas de type")
 
 def creer_tableau(): #Crée et retourne le tableau des mots utilisables en combat en évitant de mettre deux fois les memes mots
 
@@ -196,7 +219,7 @@ def creer_tableau(): #Crée et retourne le tableau des mots utilisables en comba
                 tableau_mots.append(mot[0])
         elif 3 < len(tableau_mots) <= 9 :
             mot = choice(list(dictionnaire.items()))
-            if mot[1] == "verbe" :
+            if mot[1] == "verbe" or mot[1] == "verbe_fin" :
                 tableau_mots.append(mot[0])
         elif len(tableau_mots) > 9 :
             mot = choice(list(dictionnaire.items()))
