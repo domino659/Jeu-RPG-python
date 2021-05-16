@@ -51,7 +51,7 @@ class Joueur:
         self.classe = ''
         self.etat = ''
 
-    def Tour_joueur(self, tableau_mots):
+    def Tour_joueur(self, tableau_mots): #Si le joueur n'a pas fini sa phrase il choisit un mot parmit la liste
 
         if self.phrase_finie == False :
 
