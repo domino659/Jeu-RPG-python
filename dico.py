@@ -14,6 +14,7 @@ dictionnaire = {
 "your wife"  : "sujet",
 
 "is" : "verbe",
+"wanted to be" : "verbe",
 "is rude" : "verbe",
 "is silly" : "verbe",
 "is vile" : "verbe",
@@ -30,6 +31,7 @@ dictionnaire = {
 "changes into" : "verbe",
 "dances like" : "verbe",
 "died because of" : "verbe",
+"donated organ for" : "verbe",
 "enjoyed Batman v Superman" : "verbe",
 "farted on" : "verbe",
 "likes to flash in the park" : "verbe",
