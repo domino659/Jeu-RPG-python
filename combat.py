@@ -82,7 +82,6 @@ class Joueur:
 
                     if 720 <= mouse[0] <= 720+480 and 200 <= mouse[1] <= 200+56*12: 
                         selected_word = floor((mouse[1] - 200) / 56)
-                        print(tableau_mots[selected_word])
                         try:
                             if check_phrase(self.phrase, tableau_mots[selected_word]):
                                 self.phrase.append(tableau_mots[selected_word])
