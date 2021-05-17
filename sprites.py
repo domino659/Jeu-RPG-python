@@ -149,17 +149,19 @@ class Pnj(pygame.sprite.Sprite):
                     
                     J1 = Joueur()
                     J1.classe = 'humain'
-                    J1.nom = "zeubiumaru"
+                    J1.nom = "Viktor"
 
                     J2 = IA()
-                    J2.nom="conarman"
                     i = randint(1,3)
                     print(i)
                     if i == 1 :
+                        J2.nom = 'Bron'
                         J2.sprite = ennemi1
                     elif i == 2 :
+                        J2.nom = "Oleg"
                         J2.sprite = ennemi2
                     else :
+                        J2.nom = "Judy"
                         J2.sprite = ennemi3
 
                     redraw(J1,J2, 1)     
