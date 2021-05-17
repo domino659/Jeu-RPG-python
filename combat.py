@@ -309,7 +309,6 @@ def redraw(joueur1, joueur2, j):
     afficher_phrase(joueur2, 2)
 
     screen.blit(joueur1.sprite , (141, 210))
-    print(joueur2.sprite)
     screen.blit(pygame.transform.flip(joueur2.sprite, True, False), (1427,210))
 
 
