@@ -15,7 +15,7 @@ HEIGHT = 1080
 ESCAPE = pygame.K_ESCAPE
 DEBUG = pygame.K_h
 INTERACT = pygame.K_e
-QUIT = pygame.K_p
+QUITP = pygame.K_p
 # Input Guide
 DEBUG_PRINT = 'H'
 INTERACT_PRINT = 'E'

@@ -270,8 +270,9 @@ class Game:
                     self.quit()
                 if event.key == DEBUG:
                     self.draw_debug = not self.draw_debug
-                if event.key == QUIT:
+                if event.key == QUITP:
                     self.playing = False
+                    self.main_menu()
 
 
     def show_start_screen(self):
@@ -334,4 +335,4 @@ game.show_start_screen()
 while True:
     game.new()
     game.run()
-    game.show_game_over_screen()
+    # game.show_game_over_screen()
