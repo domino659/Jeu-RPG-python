@@ -159,8 +159,17 @@ class Game:
                         pygame.quit() 
                         sys.exit()
                     if self.pvp_rect.collidepoint(event.pos):
-                        pygame.quit()
-                        sys.exit()
+                        J1 = Joueur()
+                        J1.classe = 'humain'
+                        J1.nom = "Didier"
+
+                        J2 = Joueur()
+                        J2.sprite = perso2
+                        J2.classe = 'humain'
+                        J2.nom = "Michel"
+
+                        redraw(J1,J2, 1)     
+                        combat(J1,J2)
 
                 
                 pygame.display.flip()
