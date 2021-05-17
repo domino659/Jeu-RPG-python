@@ -72,6 +72,7 @@ class Game:
         game_folder = os.path.dirname(__file__)
         img_folder = os.path.join(game_folder, "Assets\img")
         self.background = pygame.image.load(os.path.join(img_folder, "cp2077.jpg"))
+        self.pvp = pygame.image.load(os.path.join(img_folder, "pvp.png"))
         self.play_button = pygame.image.load(os.path.join(img_folder, "playgame.png"))
         self.credits_button = pygame.image.load(os.path.join(img_folder, "credits.png"))
         self.exit_button = pygame.image.load(os.path.join(img_folder, "exit.png"))
@@ -121,6 +122,12 @@ class Game:
         self.noms_rect.x = math.ceil(self.screen.get_width() / 3)
         self.noms_rect.y = math.ceil(self.screen.get_width() / 8)
 
+        # Player vs player
+        self.pvp_rect = self.noms.get_rect()
+        self.pvp_rect.x = 0
+        self.pvp_rect.y = math.ceil(self.screen.get_width() / 3.1)
+
+
     def main_menu(self):
         inmenue = True
         while inmenue:
@@ -130,6 +137,7 @@ class Game:
             self.screen.blit(self.play_button, self.play_button_rect)
             self.screen.blit(self.credits_button, self.credits_button_rect)
             self.screen.blit(self.text, self.text_rect)
+            self.screen.blit(self.pvp, self.pvp_rect)
             self.draw_text("Interact: " + INTERACT_PRINT + " , Debug Collision: " + DEBUG_PRINT + ", Game Over: " + QUIT_PRINT, FONT, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
             self.screen.blit(self.exit_button, self.exit_button_rect)
             
@@ -150,6 +158,10 @@ class Game:
                     if self.exit_button_rect.collidepoint(event.pos):
                         pygame.quit() 
                         sys.exit()
+                    if self.pvp_rect.collidepoint(event.pos):
+                        pygame.quit()
+                        sys.exit()
+
                 
                 pygame.display.flip()
 
