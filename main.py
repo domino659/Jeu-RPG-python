@@ -130,6 +130,7 @@ class Game:
             self.screen.blit(self.play_button, self.play_button_rect)
             self.screen.blit(self.credits_button, self.credits_button_rect)
             self.screen.blit(self.text, self.text_rect)
+            self.draw_text("Interact: " + INTERACT_PRINT + " , Debug Collision: " + DEBUG_PRINT + ", Game Over: " + QUIT_PRINT, FONT, 20, WHITE, WIDTH / 2, HEIGHT * 7 / 8, align="center")
             self.screen.blit(self.exit_button, self.exit_button_rect)
             
 
@@ -147,7 +148,7 @@ class Game:
                     if self.credits_button_rect.collidepoint(event.pos):
                         self.credits()
                     if self.exit_button_rect.collidepoint(event.pos):
-                        pygame.quit()
+                        pygame.quit() 
                         sys.exit()
                 
                 pygame.display.flip()
@@ -279,6 +280,7 @@ class Game:
         pygame.mixer_music.play(loops=-1)
         self.main_menu()
         
+        
         # self.screen.fill(BLACK)
         # pygame.time.wait(500)
         # self.draw_text("WELCOME TO", FONT, 100, WHITE, WIDTH / 2, HEIGHT * 3 / 8, align="center")
@@ -307,7 +309,7 @@ class Game:
         pygame.mixer_music.play(loops=-1)
         self.screen.fill(BLACK)
         self.draw_text("YOU WIN", FONT, 100, BLUE, WIDTH /2, HEIGHT / 2, align="center")
-        self.draw_text("Press a key to start", FONT, 75, WHITE, WIDTH / 2, HEIGHT * 3 / 4, align="center")
+        self.draw_text("Press a key to start", FONT, 75, WHITE, WIDTH / 2, HEIGHT * 1, align="center")
         pygame.display.flip()
         pygame.time.wait(1000)
         self.wait_for_keys()
